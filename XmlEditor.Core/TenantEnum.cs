@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace XmlEditor.Core
 {
-    enum TenantEnum
+    public enum TenantEnum
     {
         root,
         sop,

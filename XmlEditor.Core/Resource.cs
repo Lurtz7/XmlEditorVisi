@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace XmlEditor.Core
 {
-    class Resource
+    public class Resource
     {
         public string Name { get; set; }
-        public string ResourceData { get; set; }
         public LanguageEnum Language { get; set; }
         public TenantEnum Tenant { get; set; }
         public GenericKeyEnum GenericKey { get; set; }
-        public DateTime DateChange { get; set; }
+        public string DateChange { get; set; }
+        public string ResourceData { get; set; }
     
         //public override string ToString()
         //{

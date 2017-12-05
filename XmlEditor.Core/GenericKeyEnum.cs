@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace XmlEditor.Core
 {
-    enum GenericKeyEnum
+    public enum GenericKeyEnum
     {
         key,
     }

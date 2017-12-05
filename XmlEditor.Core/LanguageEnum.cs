@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace XmlEditor.Core
 {
-    enum LanguageEnum
+    public enum LanguageEnum
     {
-        svSE,
-        daDK,
-        enUS,
+        Swedish,
+        Danish,
+        English,
 
 
     }

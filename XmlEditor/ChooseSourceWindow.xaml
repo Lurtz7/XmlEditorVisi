@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:XmlEditor"
         mc:Ignorable="d"
-        Title="ChooseSourceWindow" Height="300" Width="300">
+        Title="ChooseSourceWindow" Height="500" Width="500">
     <Grid>
-        <Button x:Name="localFileButton" Content="Open local Xml file" Margin="87,47,87,0" VerticalAlignment="Top" RenderTransformOrigin="-0.108,0.76" Height="39" Click="localFileButton_Click"/>
-        <Button x:Name="openDBButton" Content="Open database" HorizontalAlignment="Left" Margin="87,202,0,0" VerticalAlignment="Top" Width="118" Height="39"/>
-        <TextBox x:Name="dBConnStringTextBox" Height="23" Margin="44,162,44,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <Label x:Name="connStringLabel" Content="Connection string to database" Margin="61,131,61,0" VerticalAlignment="Top"/>
+        <Button x:Name="localFileButton" Content="Open local Xml file" Margin="87,87,87,0" VerticalAlignment="Top" RenderTransformOrigin="-0.108,0.76" Height="68" Click="localFileButton_Click"/>
+        <Button x:Name="openDBButton" Content="Open database" Margin="187,350,187,0" VerticalAlignment="Top" Height="39"/>
+        <TextBox x:Name="dBConnStringTextBox" Height="23" Margin="44,306,44,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <Label x:Name="connStringLabel" Content="Connection string to database" Margin="160,275,160,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

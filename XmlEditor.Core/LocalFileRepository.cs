@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -48,6 +49,12 @@ namespace XmlEditor.Core
                 default:
                     throw new Exception($"Unknown Tenant string: {value}");
             }
+        }
+
+        public void SaveXmlFile(string fileName, List<Resource> resourceList)
+        {
+            
+
         }
 
         private GenericKeyEnum ConvertToGenericKey(string value)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,26 +22,43 @@ namespace XmlEditor
     /// </summary>
     public partial class MainWindow : Window
     {
+        LocalFileRepository repository = new LocalFileRepository();
         public string FileName { get; set; }
+        DataTable dt = new DataTable();
+
         public MainWindow()
         {
             InitializeComponent();
-
             this.Loaded += MainWindow_Loaded;
+           
+            
+            
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            LocalFileRepository repository = new LocalFileRepository();
-           var resources = repository.GetXmlFile(FileName);
-            //Resource[] resources = new Resource[]
-            //{
-            //    new Resource { Name = "Name 1", ResourceData = "Yada 1" },
-            //    new Resource { Name = "Name 2", ResourceData = "Yada 2" },
-            //    new Resource { Name = "Name 3", ResourceData = "Yada 3" },
-            //};
-
+            
+            var resources = repository.GetXmlFile(FileName);
+            
             xmlTableDataGrid.ItemsSource = resources;
+        }
+
+        private void saveButton_Click(object sender, RoutedEventArgs e)
+        {
+            List<Resource> resourceList = new List<Resource>();
+            foreach (Resource item in xmlTableDataGrid.Items)
+            {
+                resourceList.Add(item);   
+            }
+            repository.SaveXmlFile(FileName, resourceList);
+        }
+        private void addButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void deleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

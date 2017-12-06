@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace XmlEditor.Core
 {
-    public class Resource
+    public class Resource 
     {
         public string Name { get; set; }
         public LanguageEnum Language { get; set; }
@@ -15,11 +15,6 @@ namespace XmlEditor.Core
         public string DateChange { get; set; }
         public string ResourceData { get; set; }
     
-        //public override string ToString()
-        //{
-         
-
-        //    return base.ToString();
-        //}
+      
     }
 }

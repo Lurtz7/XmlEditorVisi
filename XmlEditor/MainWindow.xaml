@@ -2,13 +2,35 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:XmlEditor"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"     
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <DataGrid x:Name="xmlTableDataGrid"  />
-        
+        Title="MainWindow">
+
+    <Grid Margin="0,0,0,-2">
+        <ToolBarTray Background="DarkGray" Height="30" VerticalAlignment="Top">         
+            <ToolBar Name="MyToolbar" Width="200" Height="30" >
+                <Separator />
+                <Button  Content="Add" Name="addButton" Click="addButton_Click"/>
+                <Separator Background="Black"/>
+                <Button Content="Save" Name="saveButton" Click="saveButton_Click"/>
+                <Separator Background="Black" />
+                <Button  Content="Delete" Name="deleteButton" Click="deleteButton_Click"/>
+                <Separator />
+            </ToolBar>
+
+        </ToolBarTray>
+
+        <DataGrid x:Name="xmlTableDataGrid" Margin="0,30,0,0">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn  Header="Action" >
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Button Content="Delete" Click="deleteButton_Click" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+                </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </Window>

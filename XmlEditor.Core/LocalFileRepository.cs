@@ -7,9 +7,30 @@ namespace XmlEditor.Core
 {
     public class LocalFileRepository
     {
+        Dictionary<string, LanguageEnum> toDictionary; // = new Dictionary<string, LanguageEnum>
+        Dictionary<LanguageEnum, string> fromDictionary; // = new Dictionary<string, LanguageEnum>
+
+
+        public LocalFileRepository()
+        {
+            toDictionary = new Dictionary<string, LanguageEnum>();
+            toDictionary.Add("sv-SE", LanguageEnum.Swedish);
+            toDictionary.Add("en-US", LanguageEnum.English);
+            toDictionary.Add("da-DK", LanguageEnum.Danish);
+
+            fromDictionary = new Dictionary<LanguageEnum, string>();
+            fromDictionary.Add(LanguageEnum.Swedish, "sv-SE");
+            fromDictionary.Add(LanguageEnum.English, "en-US");
+            fromDictionary.Add(LanguageEnum.Danish, "da-DK");
+
+        }
+
         public Resource[] GetXmlFile(string path)
         {
             XDocument document = XDocument.Load(path);
+
+
+           
 
             var resourceElements = document
                 .Element("Resources")
@@ -19,7 +40,8 @@ namespace XmlEditor.Core
                     Name = e.Element("Name").Value,
                     ResourceData = e.Element("ResourceData").Value,
                     DateChange = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                    Language = ConvertToLanguage(e.Element("Language").Value),
+                    //Language = ConvertToLanguage(e.Element("Language").Value),
+                    Language = toDictionary[e.Element("Language").Value],
                     GenericKey = ConvertToGenericKey(e.Element("GenericKey").Value),
                     Tenant = ConvertToTenant(e.Element("Tenant").Value),
 

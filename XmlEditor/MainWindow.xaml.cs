@@ -24,7 +24,7 @@ namespace XmlEditor
     {
         LocalFileRepository repository = new LocalFileRepository();
         public string FileName { get; set; }
-        DataTable dt = new DataTable();
+        //DataTable dt = new DataTable();
 
         public MainWindow()
         {

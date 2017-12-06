@@ -9,6 +9,8 @@ namespace XmlEditor.Core
     {
         Dictionary<string, LanguageEnum> toDictionary; // = new Dictionary<string, LanguageEnum>
         Dictionary<LanguageEnum, string> fromDictionary; // = new Dictionary<string, LanguageEnum>
+        Dictionary<string, GenericKeyEnum> tokeyDictionary; // = new Dictionary<string, LanguageEnum>
+        Dictionary<GenericKeyEnum, string > fromKeyDictionary; // = new Dictionary<string, LanguageEnum>
 
 
         public LocalFileRepository()
@@ -23,6 +25,11 @@ namespace XmlEditor.Core
             fromDictionary.Add(LanguageEnum.English, "en-US");
             fromDictionary.Add(LanguageEnum.Danish, "da-DK");
 
+            tokeyDictionary = new Dictionary<string, GenericKeyEnum>();
+            tokeyDictionary.Add("*", GenericKeyEnum.key);
+
+            fromKeyDictionary = new Dictionary<GenericKeyEnum, string >();
+            fromKeyDictionary.Add(GenericKeyEnum.key, "*");
         }
 
         public Resource[] GetXmlFile(string path)
@@ -40,9 +47,8 @@ namespace XmlEditor.Core
                     Name = e.Element("Name").Value,
                     ResourceData = e.Element("ResourceData").Value,
                     DateChange = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                    //Language = ConvertToLanguage(e.Element("Language").Value),
                     Language = toDictionary[e.Element("Language").Value],
-                    GenericKey = ConvertToGenericKey(e.Element("GenericKey").Value),
+                    GenericKey = tokeyDictionary[e.Element("GenericKey").Value],
                     Tenant = ConvertToTenant(e.Element("Tenant").Value),
 
 
@@ -80,44 +86,15 @@ namespace XmlEditor.Core
 
             XElement xmlElements = new XElement("Resources", resourceList.Select(i => new XElement("Resource",
                 new XElement("Name", i.Name + "Test"),
-                   new XElement("Language", i.Language),
+                   new XElement("Language", fromDictionary[i.Language]),
                    new XElement("Tenant", i.Tenant),
-                   new XElement("GenericKey", i.GenericKey),
+                   new XElement("GenericKey", fromKeyDictionary[i.GenericKey]),
                    new XElement("DateChange", i.DateChange),
                    new XElement("ResourceData", i.ResourceData))));
             document.ReplaceNodes(xmlElements);
             document.Save(fileName);
         }
 
-        private GenericKeyEnum ConvertToGenericKey(string value)
-        {
-            switch (value)
-            {
-                case "*":
-                    return GenericKeyEnum.key;
-
-                
-                default:
-                    throw new Exception($"Unknown generickey string: {value}");
-            }
-        }
-
-        private LanguageEnum ConvertToLanguage(string value)
-        {
-            switch (value)
-            {
-                case "sv-SE":
-                    return LanguageEnum.Swedish;
-
-                case "en-US":
-                    return LanguageEnum.English;
-
-                case "da-DK":
-                    return LanguageEnum.Danish;
-
-                default:
-                    throw new Exception($"Unknown language string: {value}");
-            }
-        }
+        
     }
 }

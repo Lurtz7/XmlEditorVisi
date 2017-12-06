@@ -53,8 +53,18 @@ namespace XmlEditor.Core
 
         public void SaveXmlFile(string fileName, List<Resource> resourceList)
         {
-            
+            XDocument document = XDocument.Load(fileName);
 
+
+            XElement xmlElements = new XElement("Resources", resourceList.Select(i => new XElement("Resource",
+                new XElement("Name", i.Name + "Test"),
+                   new XElement("Language", i.Language),
+                   new XElement("Tenant", i.Tenant),
+                   new XElement("GenericKey", i.GenericKey),
+                   new XElement("DateChange", i.DateChange),
+                   new XElement("ResourceData", i.ResourceData))));
+            document.ReplaceNodes(xmlElements);
+            document.Save(fileName);
         }
 
         private GenericKeyEnum ConvertToGenericKey(string value)

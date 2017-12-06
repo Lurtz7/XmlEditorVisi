@@ -20,7 +20,7 @@
 
         </ToolBarTray>
 
-        <DataGrid x:Name="xmlTableDataGrid" Margin="0,30,0,0">
+        <DataGrid x:Name="xmlTableDataGrid" Margin="0,30,-0.4,0.6" HorizontalAlignment="Left" Width="762">
             <DataGrid.Columns>
                 <DataGridTemplateColumn  Header="Action" >
                 <DataGridTemplateColumn.CellTemplate>

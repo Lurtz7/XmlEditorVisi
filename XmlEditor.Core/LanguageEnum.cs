@@ -9,13 +9,14 @@ namespace XmlEditor.Core
 {
     public enum LanguageEnum
     {
-        [Description("sv-SE")]
+        //se-SV
         Swedish,
-        [Description("da-DK")]
+        //da-DK
         Danish,
-        [Description("en-US")]
+        //en-US
         English,
 
+        
 
     }
 }

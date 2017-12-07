@@ -77,7 +77,6 @@ namespace XmlEditor
                     GenericKey = item.GenericKey,
                     ResourceData = item.ResourceData,
                     Tenant = item.Tenant
-
                 });
             }
             xmlTableDataGrid.ItemsSource = resourceList;
@@ -96,17 +95,13 @@ namespace XmlEditor
 
                     if (table.Name != list.Name || table.ResourceData != list.ResourceData)
                     {
-
                         string dateTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff");
                         table.DateChange = dateTime;
                         list.DateChange = dateTime;
                         list.Name = table.Name;
                         xmlTableDataGrid.Items.Refresh();
-
                     }
                 }
-
-
             }
         }
 
@@ -129,7 +124,6 @@ namespace XmlEditor
                 }
             }
 
-
             repository.SaveXmlFile(FileName, resourceList);
             saveStatusBarMsg.Text = $"Last saved: {DateTime.UtcNow}";
 
@@ -140,26 +134,18 @@ namespace XmlEditor
         }
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
-
             var deletedRow = xmlTableDataGrid.SelectedItem;
             if (deletedRow.GetType() == resource.GetType())
             {
                 Resource removedRow = (Resource)deletedRow;
                 resourceList.Remove(removedRow);
-
             }
-
-
-
-
         }
 
 
         private void xmlTableDataGrid_CurrentCellChanged(object sender, EventArgs e)
         {
-
-            checkForChanges();
-            var ss= xmlTableDataGrid.Items[xmlTableDataGrid.Items.Count];
+            checkForChanges();        
         }
 
         private void xmlTableDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
@@ -167,7 +153,6 @@ namespace XmlEditor
 
             if (e.Column.Header.ToString() == "DateChange")
             {
-
                 e.Column.IsReadOnly = true;
             }
          }

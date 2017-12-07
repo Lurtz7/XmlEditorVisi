@@ -118,7 +118,7 @@ namespace XmlEditor
         {
             
             checkForChanges();
-
+            var ss= xmlTableDataGrid.Items[xmlTableDataGrid.Items.Count];
         }
 
         private void xmlTableDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)

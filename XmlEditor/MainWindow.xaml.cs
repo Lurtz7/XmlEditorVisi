@@ -30,30 +30,31 @@ namespace XmlEditor
         {
             InitializeComponent();
             this.Loaded += MainWindow_Loaded;
-           
-            
-            
+
+
+
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            
+
             var resources = repository.GetXmlFile(FileName);
-            
+
             xmlTableDataGrid.ItemsSource = resources;
 
             resourceList.Clear();
 
             foreach (var item in resources)
             {
-                resourceList.Add(new Resource {
+                resourceList.Add(new Resource
+                {
                     Name = item.Name,
                     Language = item.Language,
                     DateChange = item.DateChange,
                     GenericKey = item.GenericKey,
                     ResourceData = item.ResourceData,
                     Tenant = item.Tenant
-                    
+
                 });
             }
         }
@@ -62,24 +63,26 @@ namespace XmlEditor
         {
             if (xmlTableDataGrid.Items.Count > 0 && (xmlTableDataGrid.Items.Count == resourceList.Count))
             {
-                
+
                 for (int i = 0; i < xmlTableDataGrid.Items.Count; i++)
                 {
                     Resource table = (Resource)xmlTableDataGrid.Items[i];
                     Resource list = resourceList[i];
 
-                    if (table.Name != list.Name)
+
+                    if (table.Name != list.Name || table.ResourceData != list.ResourceData)
                     {
-                        DateTime dateTime = DateTime.Now.ToUniversalTime();                      
+
+                        string dateTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff");
                         table.DateChange = dateTime;
                         list.DateChange = dateTime;
+                        list.Name = table.Name;
                         xmlTableDataGrid.Items.Refresh();
-                        
-                       
+
                     }
                 }
 
-                
+
             }
         }
 
@@ -93,9 +96,9 @@ namespace XmlEditor
             List<Resource> resourceList = new List<Resource>();
             foreach (Resource item in xmlTableDataGrid.Items)
             {
-               
+
                 resourceList.Add(item);
-            
+
             }
             repository.SaveXmlFile(FileName, resourceList);
         }
@@ -105,15 +108,24 @@ namespace XmlEditor
         }
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
-           var row = xmlTableDataGrid.SelectedItem;
+            var row = xmlTableDataGrid.SelectedItem;
         }
 
 
         private void xmlTableDataGrid_CurrentCellChanged(object sender, EventArgs e)
         {
-            checkForChanges();
             
+            checkForChanges();
 
+        }
+
+        private void xmlTableDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.Column.Header.ToString() == "DateChange")
+            {
+
+                e.Column.IsReadOnly = true;
+            }
         }
     }
 }

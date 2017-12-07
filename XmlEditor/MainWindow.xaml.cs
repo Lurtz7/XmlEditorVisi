@@ -24,7 +24,7 @@ namespace XmlEditor
     {
         LocalFileRepository repository = new LocalFileRepository();
         public string FileName { get; set; }
-        //DataTable dt = new DataTable();
+        static List<Resource> resourceList = new List<Resource>();
 
         public MainWindow()
         {
@@ -41,14 +41,61 @@ namespace XmlEditor
             var resources = repository.GetXmlFile(FileName);
             
             xmlTableDataGrid.ItemsSource = resources;
+
+            resourceList.Clear();
+
+            foreach (var item in resources)
+            {
+                resourceList.Add(new Resource {
+                    Name = item.Name,
+                    Language = item.Language,
+                    DateChange = item.DateChange,
+                    GenericKey = item.GenericKey,
+                    ResourceData = item.ResourceData,
+                    Tenant = item.Tenant
+                    
+                });
+            }
+        }
+
+        private void checkForChanges()
+        {
+            if (xmlTableDataGrid.Items.Count > 0 && (xmlTableDataGrid.Items.Count == resourceList.Count))
+            {
+                
+                for (int i = 0; i < xmlTableDataGrid.Items.Count; i++)
+                {
+                    Resource table = (Resource)xmlTableDataGrid.Items[i];
+                    Resource list = resourceList[i];
+
+                    if (table.Name != list.Name)
+                    {
+                        DateTime dateTime = DateTime.Now.ToUniversalTime();                      
+                        table.DateChange = dateTime;
+                        list.DateChange = dateTime;
+                        xmlTableDataGrid.Items.Refresh();
+                        
+                       
+                    }
+                }
+
+                
+            }
         }
 
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
+
+            xmlTableDataGrid.CommitEdit();
+            xmlTableDataGrid.CommitEdit();
+
+
             List<Resource> resourceList = new List<Resource>();
             foreach (Resource item in xmlTableDataGrid.Items)
             {
-                resourceList.Add(item);   
+               
+                resourceList.Add(item);
+            
             }
             repository.SaveXmlFile(FileName, resourceList);
         }
@@ -58,7 +105,15 @@ namespace XmlEditor
         }
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
+           var row = xmlTableDataGrid.SelectedItem;
+        }
+
+
+        private void xmlTableDataGrid_CurrentCellChanged(object sender, EventArgs e)
+        {
+            checkForChanges();
             
+
         }
     }
 }

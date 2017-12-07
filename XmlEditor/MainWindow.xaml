@@ -12,7 +12,7 @@
                 <Separator />
                 <Button  Content="Add" Name="addButton" Click="addButton_Click"/>
                 <Separator Background="Black"/>
-                <Button Content="Save" Name="saveButton" Click="saveButton_Click"/>
+                <Button Content="Save" Name="saveButton"  Click="saveButton_Click"/>
                 <Separator Background="Black" />
                 <Button  Content="Delete" Name="deleteButton" Click="deleteButton_Click"/>
                 <Separator />
@@ -20,7 +20,8 @@
 
         </ToolBarTray>
 
-        <DataGrid x:Name="xmlTableDataGrid" Margin="0,30,-0.4,0.6" HorizontalAlignment="Left" Width="762">
+
+        <DataGrid x:Name="xmlTableDataGrid" Margin="0,30,-0.4,0.6" HorizontalAlignment="Left" CurrentCellChanged="xmlTableDataGrid_CurrentCellChanged"   >
             <DataGrid.Columns>
                 <DataGridTemplateColumn  Header="Action" >
                 <DataGridTemplateColumn.CellTemplate>

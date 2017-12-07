@@ -45,8 +45,8 @@ namespace XmlEditor.Core
                 .Select(e => new Resource
                 {
                     Name = e.Element("Name").Value,
-                    ResourceData = e.Element("ResourceData").Value,
-                    DateChange = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                    ResourceData = e.Element("ResourceData").Value, 
+                    DateChange = DateTime.Parse(e.Element("DateChange").Value),
                     Language = toDictionary[e.Element("Language").Value],
                     GenericKey = tokeyDictionary[e.Element("GenericKey").Value],
                     Tenant = ConvertToTenant(e.Element("Tenant").Value),
@@ -83,9 +83,8 @@ namespace XmlEditor.Core
         {
             XDocument document = XDocument.Load(fileName);
 
-
             XElement xmlElements = new XElement("Resources", resourceList.Select(i => new XElement("Resource",
-                new XElement("Name", i.Name + "Test"),
+                new XElement("Name", i.Name),
                    new XElement("Language", fromDictionary[i.Language]),
                    new XElement("Tenant", i.Tenant),
                    new XElement("GenericKey", fromKeyDictionary[i.GenericKey]),

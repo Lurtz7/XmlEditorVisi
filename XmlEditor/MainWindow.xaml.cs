@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -36,23 +37,36 @@ namespace XmlEditor
             this.Loaded += MainWindow_Loaded;
             resourceList.CollectionChanged += ResourceList_CollectionChanged;
 
+           
 
         }
 
         private void ResourceList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            if (e.Action == NotifyCollectionChangedAction.Replace)
+            {
+                ObservableCollection<Resource> senderItem = (ObservableCollection<Resource>)sender;
+
+           
+                var index= e.NewStartingIndex;
+                string dateTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff");
+                senderItem[index].DateChange = dateTime;
+                
+                
+
+            }
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
-                ObservableCollection<Resource> senderItem = (ObservableCollection<XmlEditor.Core.Resource>)sender;
-
-                if (senderItem[senderItem.Count -1].DateChange == null)
+                ObservableCollection<Resource> senderItem = (ObservableCollection<Resource>)sender;
+                
+                if (senderItem[senderItem.Count - 1].DateChange == null)
                 {
-                    
-                    
-                        string dateTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff");
-                        senderItem[senderItem.Count - 1].DateChange = dateTime;
 
-                    
+
+                    string dateTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff");
+                    senderItem[senderItem.Count - 1].DateChange = dateTime;
+
+
                 }
 
             }
@@ -69,6 +83,7 @@ namespace XmlEditor
 
             foreach (var item in resources)
             {
+                
                 resourceList.Add(new Resource
                 {
                     Name = item.Name,
@@ -79,38 +94,31 @@ namespace XmlEditor
                     Tenant = item.Tenant
 
                 });
+              
             }
             xmlTableDataGrid.ItemsSource = resourceList;
         }
 
-        private void checkForChanges()
+        private void checkForChanges(int index)
         {
-            if (xmlTableDataGrid.Items.Count > 0 && (xmlTableDataGrid.Items.Count == resourceList.Count))
+
+          Resource table = (Resource)xmlTableDataGrid.Items[index];
+            Resource list = (Resource)resourceList[index];
+
+            if (table != list)
             {
-
-                for (int i = 0; i < xmlTableDataGrid.Items.Count; i++)
-                {
-                    Resource table = (Resource)xmlTableDataGrid.Items[i];
-                    Resource list = resourceList[i];
-
-
-                    if (table.Name != list.Name || table.ResourceData != list.ResourceData)
-                    {
-
-                        string dateTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff");
-                        table.DateChange = dateTime;
-                        list.DateChange = dateTime;
-                        list.Name = table.Name;
-                        xmlTableDataGrid.Items.Refresh();
-
-                    }
-                }
+                
+                string dateTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff");
+                table.DateChange = dateTime;
+                list.DateChange = dateTime;
+            }           
 
 
-            }
+                
+            
         }
 
-        private void saveButton_Click(object sender, RoutedEventArgs e)
+            private void saveButton_Click(object sender, RoutedEventArgs e)
         {
 
             xmlTableDataGrid.CommitEdit();
@@ -151,16 +159,11 @@ namespace XmlEditor
 
 
 
-
         }
+        
 
 
-        private void xmlTableDataGrid_CurrentCellChanged(object sender, EventArgs e)
-        {
-
-            checkForChanges();
-
-        }
+   
 
         private void xmlTableDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
@@ -170,6 +173,12 @@ namespace XmlEditor
 
                 e.Column.IsReadOnly = true;
             }
+        }
+
+        private void xmlTableDataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+
+                 
          }
     }
 }

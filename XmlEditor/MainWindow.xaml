@@ -21,7 +21,7 @@
             </ToolBarTray>
 
             <DockPanel Name="gridDock">
-                <DataGrid DockPanel.Dock="Top" x:Name="xmlTableDataGrid" Margin="0,30,0.4,0" CurrentCellChanged="xmlTableDataGrid_CurrentCellChanged" VerticalAlignment="Stretch" >
+                <DataGrid DockPanel.Dock="Top" x:Name="xmlTableDataGrid" Margin="0,30,0.4,0" CurrentCellChanged="xmlTableDataGrid_CurrentCellChanged" VerticalAlignment="Stretch" AutoGeneratingColumn="xmlTableDataGrid_AutoGeneratingColumn" CanUserReorderColumns="False" >
                     <DataGrid.Columns>
                         <DataGridTemplateColumn  Header="Action" >
                             <DataGridTemplateColumn.CellTemplate>

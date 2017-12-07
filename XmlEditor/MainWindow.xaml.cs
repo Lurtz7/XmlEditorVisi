@@ -36,12 +36,22 @@ namespace XmlEditor
             InitializeComponent();
             this.Loaded += MainWindow_Loaded;
             resourceList.CollectionChanged += ResourceList_CollectionChanged;
+            xmlTableDataGrid.Loaded += SetMinWidths;
 
-           
 
         }
+        public void SetMinWidths(object source, EventArgs e)
+        {
+           
+            foreach (var column in xmlTableDataGrid.Columns)
+            {
+                column.MinWidth = column.ActualWidth;
+                column.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+                
+            }
+        }
 
-        private void ResourceList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+            private void ResourceList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Replace)
             {

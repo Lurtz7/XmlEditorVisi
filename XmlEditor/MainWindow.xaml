@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"     
         mc:Ignorable="d"
+        SizeToContent="WidthAndHeight"
         Title="MainWindow">
     <DockPanel VerticalAlignment="Stretch" LastChildFill="False">
 
@@ -25,7 +26,7 @@
                     <TextBlock Name="saveStatusBarMsg"  />
                 </StatusBarItem>
                 </StatusBar>
-                <DataGrid DockPanel.Dock="Right" x:Name="xmlTableDataGrid" Margin="0,30,0.4,0" CurrentCellChanged="xmlTableDataGrid_CurrentCellChanged" VerticalAlignment="Stretch" AutoGeneratingColumn="xmlTableDataGrid_AutoGeneratingColumn" CanUserReorderColumns="False" HorizontalContentAlignment="Center" >
+                <DataGrid DockPanel.Dock="Right" x:Name="xmlTableDataGrid" Margin="0,30,0.4,0"  VerticalAlignment="Stretch" AutoGeneratingColumn="xmlTableDataGrid_AutoGeneratingColumn" CanUserReorderColumns="False" HorizontalContentAlignment="Center" Width="747" >
                     <DataGrid.Columns>
                         <DataGridTemplateColumn  Header=" " >
                             <DataGridTemplateColumn.CellTemplate>

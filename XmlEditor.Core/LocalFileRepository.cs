@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -46,7 +47,7 @@ namespace XmlEditor.Core
                 {
                     Name = e.Element("Name").Value,
                     ResourceData = e.Element("ResourceData").Value, 
-                    DateChange = DateTime.Parse(e.Element("DateChange").Value),
+                    DateChange = e.Element("DateChange").Value,
                     Language = toDictionary[e.Element("Language").Value],
                     GenericKey = tokeyDictionary[e.Element("GenericKey").Value],
                     Tenant = ConvertToTenant(e.Element("Tenant").Value),

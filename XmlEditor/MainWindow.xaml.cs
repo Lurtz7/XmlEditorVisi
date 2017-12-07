@@ -84,7 +84,7 @@ namespace XmlEditor
 
         private void checkForChanges()
         {
-            if (xmlTableDataGrid.Items.Count > 0 && (xmlTableDataGrid.Items.Count == resourceList.Count))
+            if (xmlTableDataGrid.Items.Count > 0 )
             {
 
                 for (int i = 0; i < xmlTableDataGrid.Items.Count; i++)
@@ -145,7 +145,7 @@ namespace XmlEditor
 
         private void xmlTableDataGrid_CurrentCellChanged(object sender, EventArgs e)
         {
-            checkForChanges();        
+            //checkForChanges();        
         }
 
         private void xmlTableDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)

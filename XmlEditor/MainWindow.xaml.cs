@@ -98,6 +98,8 @@ namespace XmlEditor
             
             }
             repository.SaveXmlFile(FileName, resourceList);
+            saveStatusBarMsg.Text = $"Last saved: {DateTime.UtcNow}";
+
         }
         private void addButton_Click(object sender, RoutedEventArgs e)
         {

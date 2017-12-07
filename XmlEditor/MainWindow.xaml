@@ -5,33 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"     
         mc:Ignorable="d"
         Title="MainWindow">
+    <DockPanel VerticalAlignment="Stretch">
 
-    <Grid Margin="0,0,0,-2">
-        <ToolBarTray Background="DarkGray" Height="30" VerticalAlignment="Top">         
-            <ToolBar Name="MyToolbar" Width="200" Height="30" >
-                <Separator />
-                <Button  Content="Add" Name="addButton" Click="addButton_Click"/>
-                <Separator Background="Black"/>
-                <Button Content="Save" Name="saveButton"  Click="saveButton_Click"/>
-                <Separator Background="Black" />
-                <Button  Content="Delete" Name="deleteButton" Click="deleteButton_Click"/>
-                <Separator />
-            </ToolBar>
+        <Grid DockPanel.Dock="Top" Margin="0" >
+            <ToolBarTray DockPanel.Dock="Top" Background="DarkGray" Height="30" VerticalAlignment="Top" AutomationProperties.Name="toolSaveLabel" Grid.ColumnSpan="5">
+                <ToolBar Name="MyToolbar" Width="200" Height="30" >
+                    <Separator />
+                    <Button  Content="Add" Name="addButton" Click="addButton_Click"/>
+                    <Separator Background="Black"/>
+                    <Button Content="Save" Name="saveButton"  Click="saveButton_Click"/>
+                    <Separator Background="Black" />
+                    <Button  Content="Delete" Name="deleteButton" Click="deleteButton_Click"/>
+                    <Separator />
+                </ToolBar>
+            </ToolBarTray>
 
-        </ToolBarTray>
-
-
-        <DataGrid x:Name="xmlTableDataGrid" Margin="0,30,-0.4,0.6" HorizontalAlignment="Left" CurrentCellChanged="xmlTableDataGrid_CurrentCellChanged"   >
-            <DataGrid.Columns>
-                <DataGridTemplateColumn  Header="Action" >
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <Button Content="Delete" Click="deleteButton_Click" />
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-                </DataGrid.Columns>
-        </DataGrid>
-
-    </Grid>
+            <DockPanel Name="gridDock">
+                <DataGrid DockPanel.Dock="Top" x:Name="xmlTableDataGrid" Margin="0,30,0.4,0" CurrentCellChanged="xmlTableDataGrid_CurrentCellChanged" VerticalAlignment="Stretch" >
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn  Header="Action" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Delete" Click="deleteButton_Click" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <StatusBar x:Name="saveStatusBar" DockPanel.Dock="Top" Margin="2,0,0.4,0" RenderTransformOrigin="0.053,8.038" VerticalAlignment="Top" Height="20" >
+                    <StatusBarItem>
+                        <TextBlock Name="saveStatusBarMsg" />
+                    </StatusBarItem>
+                </StatusBar>
+            </DockPanel>
+        </Grid>
+    </DockPanel>
 </Window>

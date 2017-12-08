@@ -36,12 +36,22 @@ namespace XmlEditor
             InitializeComponent();
             this.Loaded += MainWindow_Loaded;
             resourceList.CollectionChanged += ResourceList_CollectionChanged;
-            
+            xmlTableDataGrid.Loaded += SetMinWidths;
 
 
         }
+        public void SetMinWidths(object source, EventArgs e)
+        {
+           
+            foreach (var column in xmlTableDataGrid.Columns)
+            {
+                column.MinWidth = column.ActualWidth;
+                column.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+                
+            }
+        }
 
-        private void ResourceList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+            private void ResourceList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Replace)
             {
@@ -117,30 +127,8 @@ namespace XmlEditor
 
 
         }
-        //private void checkForChanges()
-        //{
-        //    if (xmlTableDataGrid.Items.Count > 0)
-        //    {
 
-        //        for (int i = 0; i < xmlTableDataGrid.Items.Count; i++)
-        //        {
-        //            Resource table = (Resource)xmlTableDataGrid.Items[i];
-        //            Resource list = resourceList[i];
-
-
-        //            if (table.Name != list.Name || table.ResourceData != list.ResourceData)
-        //            {
-        //                string dateTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff");
-        //                table.DateChange = dateTime;
-        //                list.DateChange = dateTime;
-        //                list.Name = table.Name;
-        //                xmlTableDataGrid.Items.Refresh();
-        //            }
-        //        }
-        //    }
-        //}
-
-        private void saveButton_Click(object sender, RoutedEventArgs e)
+            private void saveButton_Click(object sender, RoutedEventArgs e)
         {
 
             xmlTableDataGrid.CommitEdit();

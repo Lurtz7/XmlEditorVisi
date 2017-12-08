@@ -42,16 +42,16 @@ namespace XmlEditor
         }
         public void SetMinWidths(object source, EventArgs e)
         {
-           
+
             foreach (var column in xmlTableDataGrid.Columns)
             {
                 column.MinWidth = column.ActualWidth;
                 column.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
-                
+
             }
         }
 
-            private void ResourceList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void ResourceList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Replace)
             {
@@ -111,7 +111,6 @@ namespace XmlEditor
 
         private void checkForChanges(int index)
         {
-
             Resource table = (Resource)xmlTableDataGrid.Items[index];
             Resource list = (Resource)resourceList[index];
 
@@ -121,14 +120,10 @@ namespace XmlEditor
                 string dateTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff");
                 table.DateChange = dateTime;
                 list.DateChange = dateTime;
-            }
-
-
-
-
+            }           
         }
 
-            private void saveButton_Click(object sender, RoutedEventArgs e)
+        private void saveButton_Click(object sender, RoutedEventArgs e)
         {
 
             xmlTableDataGrid.CommitEdit();
@@ -149,7 +144,7 @@ namespace XmlEditor
             repository.SaveXmlFile(FileName, resourceList);
             saveStatusBarMsg.Text = $"Last saved: {DateTime.UtcNow}";
         }
-        
+
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
             var deletedRow = xmlTableDataGrid.SelectedItem;
@@ -175,24 +170,19 @@ namespace XmlEditor
             }
         }
 
-
+        public CollectionViewSource ViewSource { get; set; }
         private void xmlTableDataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
-            
+
             Resource senderItem = (Resource)e.Row.Item;
 
-            Resource dummyResource = new Resource();
-
-
-
-            int index = e.Row.GetIndex(); ;
+            int index = e.Row.GetIndex();
             string dateTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff");
-            senderItem.DateChange = dateTime;
-            //resourceList[index].DateChange = dateTime;
+            //senderItem.DateChange = dateTime;
+            resourceList[index].DateChange = dateTime;          
 
             resourceList.Add(senderItem);
-            resourceList.Remove(resourceList[resourceList.Count-1]);
-
+            resourceList.Remove(resourceList[resourceList.Count - 1]);
         }
 
 

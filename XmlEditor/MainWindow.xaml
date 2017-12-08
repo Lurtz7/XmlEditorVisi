@@ -7,18 +7,18 @@
         SizeToContent="WidthAndHeight"
         Title="Resource Tool 1.0">
     <DockPanel VerticalAlignment="Stretch" LastChildFill="False">
+        <Menu DockPanel.Dock="Top">
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+            <MenuItem Header="File">
+                <MenuItem Header="Save" Click="saveButton_Click" />
+            </MenuItem>
+        </Menu>
 
-        <Grid DockPanel.Dock="Top" Margin="0" >
-            <ToolBarTray DockPanel.Dock="Top" Background="DarkGray" Height="30" VerticalAlignment="Top" Grid.ColumnSpan="5">
-                <ToolBar Name="MyToolbar" Width="200" Height="30" >
-                    <Separator />
-                    <Separator Background="Black"/>
-                    <Button Content="Save" Name="saveButton"  Click="saveButton_Click"/>
-                    <Separator Background="Black" />
-                    <Button  Content="Delete" Name="deleteButton" Click="deleteButton_Click" Visibility="Collapsed"/>
-                    <Separator />
-                </ToolBar>
-            </ToolBarTray>
+        <Grid DockPanel.Dock="Top" Margin="0" >           
 
             <DockPanel>
                 <StatusBar x:Name="saveStatusBar" DockPanel.Dock="Bottom" Margin="2,0,0.4,0" RenderTransformOrigin="0.053,8.038" VerticalAlignment="Top" Height="20"  >
@@ -26,7 +26,7 @@
                     <TextBlock Name="saveStatusBarMsg"  />
                 </StatusBarItem>
                 </StatusBar>
-                <DataGrid DockPanel.Dock="Right" x:Name="xmlTableDataGrid" Margin="0,30,0.4,0" VerticalAlignment="Stretch" AutoGeneratingColumn="xmlTableDataGrid_AutoGeneratingColumn" CanUserReorderColumns="False" HorizontalContentAlignment="Center"  RowEditEnding="xmlTableDataGrid_RowEditEnding" >
+                <DataGrid DockPanel.Dock="Right" x:Name="xmlTableDataGrid" Margin="0,0,0.4,0" VerticalAlignment="Stretch" AutoGeneratingColumn="xmlTableDataGrid_AutoGeneratingColumn" CanUserReorderColumns="False" HorizontalContentAlignment="Center"  RowEditEnding="xmlTableDataGrid_RowEditEnding" >
                     <DataGrid.Columns>
                         <DataGridTemplateColumn  Header=" " >
                             <DataGridTemplateColumn.CellTemplate>

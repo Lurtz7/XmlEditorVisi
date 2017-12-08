@@ -36,8 +36,8 @@ namespace XmlEditor
             InitializeComponent();
             this.Loaded += MainWindow_Loaded;
             resourceList.CollectionChanged += ResourceList_CollectionChanged;
+            
 
-           
 
         }
 
@@ -47,18 +47,18 @@ namespace XmlEditor
             {
                 ObservableCollection<Resource> senderItem = (ObservableCollection<Resource>)sender;
 
-           
-                var index= e.NewStartingIndex;
+
+                var index = e.NewStartingIndex;
                 string dateTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff");
                 senderItem[index].DateChange = dateTime;
-                
-                
+
+
 
             }
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
                 ObservableCollection<Resource> senderItem = (ObservableCollection<Resource>)sender;
-                
+
                 if (senderItem[senderItem.Count - 1].DateChange == null)
                 {
 
@@ -83,7 +83,7 @@ namespace XmlEditor
 
             foreach (var item in resources)
             {
-                
+
                 resourceList.Add(new Resource
                 {
                     Name = item.Name,
@@ -94,7 +94,7 @@ namespace XmlEditor
                     Tenant = item.Tenant
 
                 });
-              
+
             }
             xmlTableDataGrid.ItemsSource = resourceList;
         }
@@ -102,23 +102,45 @@ namespace XmlEditor
         private void checkForChanges(int index)
         {
 
-          Resource table = (Resource)xmlTableDataGrid.Items[index];
+            Resource table = (Resource)xmlTableDataGrid.Items[index];
             Resource list = (Resource)resourceList[index];
 
             if (table != list)
             {
-                
+
                 string dateTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff");
                 table.DateChange = dateTime;
                 list.DateChange = dateTime;
-            }           
+            }
 
 
-                
-            
+
+
         }
+        //private void checkForChanges()
+        //{
+        //    if (xmlTableDataGrid.Items.Count > 0)
+        //    {
 
-            private void saveButton_Click(object sender, RoutedEventArgs e)
+        //        for (int i = 0; i < xmlTableDataGrid.Items.Count; i++)
+        //        {
+        //            Resource table = (Resource)xmlTableDataGrid.Items[i];
+        //            Resource list = resourceList[i];
+
+
+        //            if (table.Name != list.Name || table.ResourceData != list.ResourceData)
+        //            {
+        //                string dateTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff");
+        //                table.DateChange = dateTime;
+        //                list.DateChange = dateTime;
+        //                list.Name = table.Name;
+        //                xmlTableDataGrid.Items.Refresh();
+        //            }
+        //        }
+        //    }
+        //}
+
+        private void saveButton_Click(object sender, RoutedEventArgs e)
         {
 
             xmlTableDataGrid.CommitEdit();
@@ -136,19 +158,12 @@ namespace XmlEditor
 
                 }
             }
-
-
             repository.SaveXmlFile(FileName, resourceList);
             saveStatusBarMsg.Text = $"Last saved: {DateTime.UtcNow}";
-
         }
-        private void addButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
-
             var deletedRow = xmlTableDataGrid.SelectedItem;
             if (deletedRow.GetType() == resource.GetType())
             {
@@ -156,14 +171,11 @@ namespace XmlEditor
                 resourceList.Remove(removedRow);
 
             }
-
-
-
         }
-        
 
 
-   
+
+
 
         private void xmlTableDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
@@ -175,10 +187,26 @@ namespace XmlEditor
             }
         }
 
-        private void xmlTableDataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        {
 
-                 
-         }
+        private void xmlTableDataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        {
+            
+            Resource senderItem = (Resource)e.Row.Item;
+
+            Resource dummyResource = new Resource();
+
+
+
+            int index = e.Row.GetIndex(); ;
+            string dateTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff");
+            senderItem.DateChange = dateTime;
+            //resourceList[index].DateChange = dateTime;
+
+            resourceList.Add(senderItem);
+            resourceList.Remove(resourceList[resourceList.Count-1]);
+
+        }
+
+
     }
 }

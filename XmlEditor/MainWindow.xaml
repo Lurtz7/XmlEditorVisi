@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"     
         mc:Ignorable="d"
         SizeToContent="WidthAndHeight"
-        Title="MainWindow">
+        Title="Resource Tool 1.0">
     <DockPanel VerticalAlignment="Stretch" LastChildFill="False">
 
         <Grid DockPanel.Dock="Top" Margin="0" >
@@ -15,7 +15,7 @@
                     <Separator Background="Black"/>
                     <Button Content="Save" Name="saveButton"  Click="saveButton_Click"/>
                     <Separator Background="Black" />
-                    <Button  Content="Delete" Name="deleteButton" Click="deleteButton_Click"/>
+                    <Button  Content="Delete" Name="deleteButton" Click="deleteButton_Click" Visibility="Collapsed"/>
                     <Separator />
                 </ToolBar>
             </ToolBarTray>

@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace XmlEditor.Core
 {
-    public enum TenantEnum
+    public class TenantValidator
     {
-        root,
-        sop,
-        PTK,
-        Folksam,
+        
     }
 }

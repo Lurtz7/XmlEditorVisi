@@ -162,6 +162,20 @@ namespace XmlEditor
 
         private void xmlTableDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
+            if (e.Column.Header.ToString() == "Language")
+            {
+
+             
+            }
+            if (e.Column.Header.ToString() == "GenericKey")
+            {
+                e.Column.IsReadOnly = true;
+            }
+            if (e.Column.Header.ToString() == "Tenant")
+            {
+
+                e.Column.IsReadOnly = true;
+            }
 
             if (e.Column.Header.ToString() == "DateChange")
             {
@@ -170,7 +184,7 @@ namespace XmlEditor
             }
         }
 
-        public CollectionViewSource ViewSource { get; set; }
+        //public CollectionViewSource ViewSource { get; set; }
         private void xmlTableDataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
 

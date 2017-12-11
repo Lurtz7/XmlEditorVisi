@@ -7,16 +7,8 @@ using System.Threading.Tasks;
 
 namespace XmlEditor.Core
 {
-    public enum LanguageEnum
+    public class LanguageValidator
     {
-        //se-SV
-        Swedish,
-        //da-DK
-        Danish,
-        //en-US
-        English,
-
-        
-
+     
     }
 }

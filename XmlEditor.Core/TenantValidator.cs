@@ -9,26 +9,31 @@ namespace XmlEditor.Core
 {
     public class TenantValidator
     {
-        public IsValid ValidateTenant(ObservableCollection<Resource> resourceList)
-        {
-            IsValid isTenantValid = new IsValid();
-            
+        public void ValidateTenant(ObservableCollection<Resource> resourceList)
+        {                        
             int index = 0;            
             foreach (Resource tenant in resourceList)
             {
-                if (tenant.Tenant.ToLower() != "root" || tenant.Tenant.ToLower() != "sop" || tenant.Tenant.ToLower() != "ptk" || tenant.Tenant.ToLower() != "folksam")
+                if (tenant.Tenant.ToLower() == "root" || tenant.Tenant.ToLower() == "sop" || tenant.Tenant.ToLower() == "ptk" || tenant.Tenant.ToLower() == "folksam")
                 {
-                    isTenantValid.Valid = false;
-                    isTenantValid.Index = index;
+
+                    IsValid.valid.Add(new IsValid
+                    {
+                        ValidTenant = true,
+                        Index = index
+                    });
                 }
                 else
                 {
-                    isTenantValid.Valid = true;
-                    isTenantValid.Index = index;
+                    IsValid.valid.Add(new IsValid
+                    {
+                        ValidTenant = false,
+                        Index = index
+                    });
                 }
                 index++;
             }
-            return isTenantValid;
+            
         }
     }
 }

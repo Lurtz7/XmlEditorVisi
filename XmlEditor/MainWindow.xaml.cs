@@ -106,6 +106,9 @@ namespace XmlEditor
                 });
 
             }
+            IsValid isValid = new IsValid();
+            
+            isValid.Validator(resourceList);
             xmlTableDataGrid.ItemsSource = resourceList;
         }
 

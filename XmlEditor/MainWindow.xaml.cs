@@ -123,14 +123,10 @@ namespace XmlEditor
             }           
         }
 
-        private void saveButton_Click(object sender, RoutedEventArgs e)
+        private List<Resource> AddToListForSave()
         {
 
-            xmlTableDataGrid.CommitEdit();
-            xmlTableDataGrid.CommitEdit();
-
-
-            List<Resource> resourceList = new List<Resource>();
+            List<Resource> resourceList = new List<Resource>(); 
             foreach (var item in xmlTableDataGrid.Items)
             {
                 if (item.GetType() == resource.GetType())
@@ -141,6 +137,18 @@ namespace XmlEditor
 
                 }
             }
+
+            return resourceList;
+        }
+
+        private void saveButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            xmlTableDataGrid.CommitEdit();
+            xmlTableDataGrid.CommitEdit();
+
+            List<Resource> resourceList = AddToListForSave();
+            
             repository.SaveXmlFile(FileName, resourceList);
             saveStatusBarMsg.Text = $"Last saved: {DateTime.UtcNow}";
         }
@@ -199,6 +207,52 @@ namespace XmlEditor
             resourceList.Remove(resourceList[resourceList.Count - 1]);
         }
 
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            //xmlTableDataGrid.CommitEdit();
+            //xmlTableDataGrid.CommitEdit();
+            string messageBoxText = "Do you want to save changes?";
+            string caption = "XmlEditor 1.0";
+            MessageBoxButton button = MessageBoxButton.YesNoCancel;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            var originalList = repository.GetXmlFile(FileName);
 
+            
+            for (int i = 0; i < xmlTableDataGrid.Items.Count; i++)
+            {
+                var tableItems = xmlTableDataGrid.Items[i];
+                
+                if (tableItems.GetType() == originalList[0].GetType()) 
+                {
+                    Resource table = (Resource)xmlTableDataGrid.Items[i];
+                    Resource list = originalList[i];
+
+               
+
+                if (list.DateChange != table.DateChange)
+                {
+                    MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+                    switch (result)
+                    {
+                        case MessageBoxResult.Yes:
+                            List<Resource> resourceList = AddToListForSave();
+                            repository.SaveXmlFile(FileName, resourceList);
+
+                            break;
+                        case MessageBoxResult.No:
+                            e.Cancel = false;
+                            break;
+                        case MessageBoxResult.Cancel:
+                            e.Cancel = true;
+                            break;
+                    }
+                        break;
+                }
+                }
+
+            }
+
+            
+        }
     }
 }

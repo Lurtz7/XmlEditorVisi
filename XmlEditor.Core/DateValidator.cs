@@ -6,5 +6,7 @@ namespace XmlEditor.Core
 {
     class DateValidator
     {
+
+
     }
 }

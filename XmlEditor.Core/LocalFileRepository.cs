@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
 
+
 namespace XmlEditor.Core
 {
     public class LocalFileRepository
@@ -83,7 +84,10 @@ namespace XmlEditor.Core
 
         public void SaveXmlFile(string fileName, List<Resource> resourceList)
         {
-            XDocument document = XDocument.Load(fileName);
+
+            
+
+              XDocument document = XDocument.Load(fileName);
 
             XElement xmlElements = new XElement("Resources", resourceList.Select(i => new XElement("Resource",
                 new XElement("Name", i.Name),

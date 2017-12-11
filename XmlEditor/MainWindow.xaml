@@ -28,10 +28,10 @@
                 </StatusBar>
                 <DataGrid DockPanel.Dock="Right" x:Name="xmlTableDataGrid" Margin="0,0,0.4,0" VerticalAlignment="Stretch" AutoGeneratingColumn="xmlTableDataGrid_AutoGeneratingColumn" CanUserReorderColumns="False" HorizontalContentAlignment="Center"  RowEditEnding="xmlTableDataGrid_RowEditEnding" >
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn  Header=" " >
+                        <DataGridTemplateColumn  >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Content="Delete" Click="deleteButton_Click" />
+                                    <Button Content="Delete" Click="deleteButton_Click"  />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

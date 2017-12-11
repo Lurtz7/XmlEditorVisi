@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
@@ -10,43 +11,25 @@ namespace XmlEditor.Core
 {
     public class LanguageValidator
     {
-        public static List<IsValid> CheckIfValidLanguage(List<Resource> resourceList)
+        public void ValidateLanguage(ObservableCollection<Resource> resourceList)
         {
-
-            List<IsValid> validList = new List<IsValid>();
             CultureInfo[] cultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
-            int index = 0;
 
-            IsValid valid = new IsValid();
-            foreach (var item in resourceList)
+            for (int i = 0; i < resourceList.Count; i++)
             {
-                valid.Valid = false;
                 foreach (CultureInfo culture in cultures)
                 {
-                    if (item.Language == culture.Name)
+                    if (resourceList[i].Language == culture.Name)
                     {
-
-                        valid.Valid = true;
-                        valid.Index = index;
+                        IsValid.valid[i].ValidLanguage = true;
                         break;
                     }
+                    else
+                    {
+                        IsValid.valid[i].ValidLanguage = false;
+                    }
                 }
-                if (valid.Valid == false)
-                {
-
-                    valid.Index = index;
-                    valid.Valid = false;
-
-
-                }
-                validList.Add(valid);
-                index++;
             }
-
-
-
-            return validList;
-
         }
     }
 }

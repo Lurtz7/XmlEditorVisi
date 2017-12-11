@@ -23,12 +23,12 @@ namespace XmlEditor.Core
         public void Validator(ObservableCollection<Resource> resourceList)
         {
             tenant.ValidateTenant(resourceList);
-            // language.ValidateLanguage(resourceList);
+            language.ValidateLanguage(resourceList);
             date.ValidateDate(resourceList);
 
             foreach (var item in valid)
             {                
-                if (item.ValidTenant && item.ValidDate)
+                if (item.ValidTenant && item.ValidDate && item.ValidLanguage)
                 {
                     item.Valid = true;
                 }

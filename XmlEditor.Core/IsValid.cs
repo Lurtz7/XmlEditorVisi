@@ -14,7 +14,7 @@ namespace XmlEditor.Core
 
         public int Index { get; set; }
 
-        List<IsValid> valid = new List<IsValid>();
+        public static List<IsValid> valid = new List<IsValid>();
 
         TenantValidator tenant = new TenantValidator();
         LanguageValidator language = new LanguageValidator();
@@ -22,25 +22,17 @@ namespace XmlEditor.Core
 
         public void Validator(ObservableCollection<Resource> resourceList)
         {
-            var validateTenant = tenant.ValidateTenant(resourceList);
-            //var validateLanguage = tenant.ValidateLanguage(resourceList);
-            //var validateDate = tenant.ValidateDate(resourceList);
+            tenant.ValidateTenant(resourceList);
+            // language.ValidateLanguage(resourceList);
+            date.ValidateDate(resourceList);
 
-            foreach (var item in validateTenant)
-            {
-                valid.Add(new IsValid
+            foreach (var item in valid)
+            {                
+                if (item.ValidTenant && item.ValidDate)
                 {
-                    //ValidLanguage = validateLanguage[item.Index];
-                    //ValidDate = validateDate[item.Index];
-                    ValidTenant = item.ValidTenant,
-
-                });
-                //if (valid.ValidTenant && valid.ValidLanguage && valid.ValidDate)
-                //{
-                //    Valid = true;
-                //}
+                    item.Valid = true;
+                }
             }
-
         }
     }
 }

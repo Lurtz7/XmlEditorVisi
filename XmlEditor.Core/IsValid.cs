@@ -20,6 +20,12 @@ namespace XmlEditor.Core
         LanguageValidator language = new LanguageValidator();
         DateValidator date = new DateValidator();
 
+        public bool ValidList(ObservableCollection<Resource>  resourceList)
+        {
+            Validator(resourceList);
+            return valid.TrueForAll(v => v.Valid == true);
+        }
+
         public void Validator(ObservableCollection<Resource> resourceList)
         {
             tenant.ValidateTenant(resourceList);

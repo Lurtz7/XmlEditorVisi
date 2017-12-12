@@ -6,6 +6,15 @@
         mc:Ignorable="d"
         SizeToContent="WidthAndHeight"
         Title="Resource Tool 1.0" Closing="Window_Closing">
+    <Window.Resources>
+        <Style TargetType="DataGridRow">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Name}" Value="2">
+                    <Setter Property="Background" Value="Red" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <DockPanel VerticalAlignment="Stretch" LastChildFill="False">
         <Menu DockPanel.Dock="Top">
             <Menu.ItemsPanel>

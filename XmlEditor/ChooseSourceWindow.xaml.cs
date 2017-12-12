@@ -29,13 +29,14 @@ namespace XmlEditor
         private void localFileButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFile = new OpenFileDialog();
+            openFile.Filter = "xml files(*.xml)|*.xml|All files (*.*)|*.*";    
 
             bool? result = openFile.ShowDialog();
             if (result == true)
             {
                
                 string filename = openFile.FileName;
-                var mainWindow = new MainWindow();
+                var mainWindow = new MainWindow(filename);
                 mainWindow.FileName = filename;
                 mainWindow.Show();
             }

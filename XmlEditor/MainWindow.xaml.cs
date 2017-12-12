@@ -27,17 +27,23 @@ namespace XmlEditor
     {
         LocalFileRepository repository = new LocalFileRepository();
         public string FileName { get; set; }
-        static ObservableCollection<Resource> resourceList = new ObservableCollection<Resource>();
+        public string MyTitle { get; set; }
+
+        ObservableCollection<Resource> resourceList = new ObservableCollection<Resource>();
         Resource resource = new Resource();
 
 
-        public MainWindow()
+        public MainWindow(string filename)
         {
             InitializeComponent();
             this.Loaded += MainWindow_Loaded;
             resourceList.CollectionChanged += ResourceList_CollectionChanged;
             xmlTableDataGrid.Loaded += SetMinWidths;
+            this.Title = filename;
+
         }
+
+    
         public void SetMinWidths(object source, EventArgs e)
         {
 
@@ -83,6 +89,7 @@ namespace XmlEditor
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            
             var resources = repository.GetXmlFile(FileName);
 
             resourceList.Clear();
@@ -157,6 +164,7 @@ namespace XmlEditor
 
         private void xmlTableDataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
+            
             if (e.Column.Header.ToString() == "Language")
             {
 
@@ -195,8 +203,8 @@ namespace XmlEditor
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            //xmlTableDataGrid.CommitEdit();
-            //xmlTableDataGrid.CommitEdit();
+            xmlTableDataGrid.CommitEdit();
+            xmlTableDataGrid.CommitEdit();
             string messageBoxText = "Do you want to save changes?";
             string caption = "XmlEditor 1.0";
             MessageBoxButton button = MessageBoxButton.YesNoCancel;

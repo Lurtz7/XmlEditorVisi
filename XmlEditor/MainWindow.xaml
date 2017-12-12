@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"     
         mc:Ignorable="d"
         SizeToContent="WidthAndHeight"
-        Title="Resource Tool 1.0" Closing="Window_Closing">
+        Title= "" Closing="Window_Closing">
     <Window.Resources>
         <Style TargetType="DataGridRow">
             <Style.Triggers>

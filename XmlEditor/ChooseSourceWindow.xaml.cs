@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
 using Microsoft.Win32;
+using XmlEditor.Core;
+
 
 namespace XmlEditor
 {
@@ -29,7 +31,6 @@ namespace XmlEditor
         private void localFileButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFile = new OpenFileDialog();
-            openFile.Filter = "xml files(*.xml)|*.xml|All files (*.*)|*.*";    
 
             bool? result = openFile.ShowDialog();
             if (result == true)
@@ -38,6 +39,8 @@ namespace XmlEditor
                 string filename = openFile.FileName;
                 var mainWindow = new MainWindow(filename);
                 mainWindow.FileName = filename;
+                
+
                 mainWindow.Show();
             }
 

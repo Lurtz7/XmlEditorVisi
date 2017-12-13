@@ -35,12 +35,10 @@ namespace XmlEditor.Core
     //        fromKeyDictionary.Add(GenericKeyEnum.key, "*");
     //    }
 
-        public Resource[] GetXmlFile(string path)
+       static public Resource[] GetXmlFile(string path)
         {
             XDocument document = XDocument.Load(path);
 
-
-           
 
             var resourceElements = document
                 .Element("Resources")

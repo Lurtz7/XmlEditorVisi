@@ -69,6 +69,7 @@
     <Compile Include="ChooseSourceWindow.xaml.cs">
       <DependentUpon>ChooseSourceWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LessDynamicClass.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

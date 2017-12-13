@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -61,7 +62,6 @@ namespace XmlEditor
             var resources = LocalFileRepository.GetXmlFile(FileName);
             resourceList = new ResourceList(resources);
             xmlTableDataGrid.ItemsSource = resourceList;
-
 
 
         }

@@ -10,7 +10,7 @@ namespace XmlEditor.Core
 {
     public class LocalFileRepository
     {
-        IsValid isItValid = new IsValid();
+        Validator isItValid = new Validator();
         static public Resource[] GetXmlFile(string path)
         {
             XDocument document = XDocument.Load(path);
@@ -39,15 +39,8 @@ namespace XmlEditor.Core
 
         public bool SaveXmlFile(string fileName, List<Resource> resourceList)
         {
-            bool save = true;
-            foreach (var item in IsValid.valid)
-            {
-                if (item.Valid == false)
-                {
-                    save = false;
-                }
-                
-            }
+            bool save = Validator.ValidatorList.TrueForAll(o => o.IsValid);
+         
 
             if (save)
             {

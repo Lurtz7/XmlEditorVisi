@@ -17,23 +17,18 @@ namespace XmlEditor.Core
         public override ValidationResult Validate(object value,
             System.Globalization.CultureInfo cultureInfo)
         {
-            IsValid isValid = new IsValid();
             Resource resource = (value as BindingGroup).Items[0] as Resource;
 
-            List<IsValid> valid = isValid.ValidList(resource);
+            var validator = Validator.Validate(resource);
 
-            if (!valid[0].ValidDate)
-            {
+            if (!validator.ValidDate)
                 return new ValidationResult(false, "Date is not in correct format.");
-            }
-            if (!valid[0].ValidLanguage)
-            {
+
+            if (!validator.ValidLanguage)
                 return new ValidationResult(false, "Language is not in correct format. Use language+region, French as used in Canada(fr-CA)");
-            }
-            if (!valid[0].ValidTenant)
-            {
+
+            if (!validator.ValidTenant)
                 return new ValidationResult(false, "Tenant is not recognized.");
-            }
 
             return ValidationResult.ValidResult;
         }

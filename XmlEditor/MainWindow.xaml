@@ -21,10 +21,7 @@
             </MenuItem>
         </Menu>
       
-        <Grid DockPanel.Dock="Top" Margin="0" >
-            <!--<Grid.Resources>
-                <local:ResourceList x:Key="Resource"/>
-            </Grid.Resources>-->
+        <Grid DockPanel.Dock="Top" Margin="0" >            
             <DockPanel>
                 <StatusBar x:Name="saveStatusBar" DockPanel.Dock="Bottom" Margin="2,0,0.4,0" RenderTransformOrigin="0.053,8.038" VerticalAlignment="Top" Height="20"  >
                     <StatusBarItem>
@@ -33,12 +30,12 @@
                 </StatusBar>
 
                 <DataGrid DockPanel.Dock="Right" x:Name="xmlTableDataGrid" Margin="0,0,0.4,0" VerticalAlignment="Stretch"  CanUserReorderColumns="False" HorizontalContentAlignment="Center" AutoGenerateColumns="False">
-                    <!--AutoGeneratingColumn="xmlTableDataGrid_AutoGeneratingColumn"-->
+                   
                     <DataGrid.Resources>
                         <Style x:Key="errorStyle" TargetType="{x:Type TextBox}">
                             <Setter Property="Padding" Value="-2"/>
-                            <Style.Triggers>
-                                <Trigger Property="Validation.HasError" Value="True">
+                            <Style.Triggers >
+                                <Trigger Property="Validation.HasError" Value="False">
                                     <Setter Property="Background" Value="Red"/>
                                     <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
                                 </Trigger>
@@ -55,12 +52,12 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="Name"          Binding="{Binding Name, ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource errorStyle}"/>
-                        <DataGridTextColumn Header="Language"      EditingElementStyle="{StaticResource errorStyle}" Binding="{Binding Language, ValidatesOnExceptions=True}" />
-                        <DataGridTextColumn Header="GenericKey"    Binding="{Binding GenericKey, ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource errorStyle}"/>
-                        <DataGridTextColumn Header="Tenant"        Binding="{Binding Tenant, ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource errorStyle}"/>
-                        <DataGridTextColumn Header="DateChange"    Binding="{Binding DateChange, ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource errorStyle}"/>
-                        <DataGridTextColumn Header="ResourceData"  Binding="{Binding ResourceData, ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource errorStyle}"/>
+                        <DataGridTextColumn Header="Name"         EditingElementStyle="{StaticResource errorStyle}" Binding="{Binding Name, ValidatesOnExceptions=True}"      />
+                        <DataGridTextColumn Header="Language"     EditingElementStyle="{StaticResource errorStyle}" Binding="{Binding Language, ValidatesOnExceptions=True}"     />
+                        <DataGridTextColumn Header="GenericKey"   EditingElementStyle="{StaticResource errorStyle}" Binding="{Binding GenericKey, ValidatesOnExceptions=True}"   />
+                        <DataGridTextColumn Header="Tenant"       EditingElementStyle="{StaticResource errorStyle}" Binding="{Binding Tenant, ValidatesOnExceptions=True}"       />
+                        <DataGridTextColumn Header="DateChange"   EditingElementStyle="{StaticResource errorStyle}" Binding="{Binding DateChange, ValidatesOnExceptions=True}"   />
+                        <DataGridTextColumn Header="ResourceData" EditingElementStyle="{StaticResource errorStyle}" Binding="{Binding ResourceData, ValidatesOnExceptions=True}" />
                         
                     </DataGrid.Columns>
 
@@ -73,6 +70,7 @@
                             <Grid Margin="0,-2,0,-2" ToolTip="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}}, Path=(Validation.Errors)[0].ErrorContent}">
                                 <Ellipse StrokeThickness="0" Fill="Red" Width="{TemplateBinding FontSize}" Height="{TemplateBinding FontSize}" />
                                 <TextBlock Text="!" FontSize="{TemplateBinding FontSize}" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"  />
+                                
                             </Grid>
                         </ControlTemplate>
                     </DataGrid.RowValidationErrorTemplate>

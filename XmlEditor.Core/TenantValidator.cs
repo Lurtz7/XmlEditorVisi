@@ -10,8 +10,8 @@ namespace XmlEditor.Core
     public class TenantValidator
     {
         public void ValidateTenant(ObservableCollection<Resource> resourceList)
-        {                        
-            int index = 0;            
+        {
+            int index = 0;
             foreach (Resource tenant in resourceList)
             {
                 if (tenant.Tenant.ToLower() == "root" || tenant.Tenant.ToLower() == "sop" || tenant.Tenant.ToLower() == "ptk" || tenant.Tenant.ToLower() == "folksam")
@@ -33,7 +33,7 @@ namespace XmlEditor.Core
                 }
                 index++;
             }
-            
+
         }
     }
 }

@@ -26,11 +26,10 @@ namespace XmlEditor
     public partial class MainWindow : Window
     {
         LocalFileRepository repository = new LocalFileRepository();
-         public string FileName { get; set; }
-        //static ObservableCollection<Resource> resourceList = new ObservableCollection<Resource>();
+        public string FileName { get; set; }
         Resource resource = new Resource();
         ResourceList resourceList;
-        
+
 
         public MainWindow(string fileName)
         {
@@ -38,9 +37,7 @@ namespace XmlEditor
 
             FileName = fileName;
             this.Title = FileName;
-
             this.Loaded += MainWindow_Loaded;
-            //resourceList.CollectionChanged += ResourceList_CollectionChanged;
             xmlTableDataGrid.Loaded += SetMinWidths;
         }
         public void SetMinWidths(object source, EventArgs e)
@@ -54,37 +51,9 @@ namespace XmlEditor
             }
         }
 
-        //private void ResourceList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        //{
-        //    if (e.Action == NotifyCollectionChangedAction.Replace)
-        //    {
-        //        ObservableCollection<Resource> senderItem = (ObservableCollection<Resource>)sender;
-
-
-        //        var index = e.NewStartingIndex;
-        //        string dateTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff");
-        //        senderItem[index].DateChange = dateTime;
 
 
 
-        //    }
-        //    if (e.Action == NotifyCollectionChangedAction.Add)
-        //    {
-        //        ObservableCollection<Resource> senderItem = (ObservableCollection<Resource>)sender;
-
-        //        if (senderItem[senderItem.Count - 1].DateChange == null)
-        //        {
-
-
-        //            string dateTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff");
-        //            senderItem[senderItem.Count - 1].DateChange = dateTime;
-
-
-        //        }
-
-        //    }
-
-        //}
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
@@ -92,7 +61,7 @@ namespace XmlEditor
             var resources = LocalFileRepository.GetXmlFile(FileName);
             resourceList = new ResourceList(resources);
             xmlTableDataGrid.ItemsSource = resourceList;
-            
+
         }
 
         private void checkForChanges(int index)
@@ -146,65 +115,51 @@ namespace XmlEditor
         }
 
 
-
-
-        //private void xmlTableDataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
-        //{
-        //    Resource senderItem = (Resource)e.Row.Item;
-
-        //    int index = e.Row.GetIndex();
-        //    string dateTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff");
-        //    resourceList[index].DateChange = dateTime;
-
-        //    resourceList.Add(senderItem);
-        //    resourceList.Remove(resourceList[resourceList.Count - 1]);
-        //}
-
         private void Window_Closing(object sender, CancelEventArgs e)
-        { 
-        xmlTableDataGrid.CommitEdit();
-        xmlTableDataGrid.CommitEdit();
-        string messageBoxText = "Do you want to save changes?";
-        string caption = "XmlEditor 1.0";
-        MessageBoxButton button = MessageBoxButton.YesNoCancel;
-        MessageBoxImage icon = MessageBoxImage.Warning;
-        var originalList = LocalFileRepository.GetXmlFile(FileName);
+        {
+            xmlTableDataGrid.CommitEdit();
+            xmlTableDataGrid.CommitEdit();
+            string messageBoxText = "Do you want to save changes?";
+            string caption = "XmlEditor 1.0";
+            MessageBoxButton button = MessageBoxButton.YesNoCancel;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            var originalList = LocalFileRepository.GetXmlFile(FileName);
 
 
-                for (int i = 0; i<xmlTableDataGrid.Items.Count; i++)
+            for (int i = 0; i < xmlTableDataGrid.Items.Count; i++)
+            {
+                var tableItems = xmlTableDataGrid.Items[i];
+
+                if (tableItems.GetType() == originalList[0].GetType())
                 {
-                    var tableItems = xmlTableDataGrid.Items[i];
+                    Resource table = (Resource)xmlTableDataGrid.Items[i];
+                    Resource list = originalList[i];
 
-                    if (tableItems.GetType() == originalList[0].GetType())
+
+
+                    if (list.DateChange != table.DateChange)
                     {
-                        Resource table = (Resource)xmlTableDataGrid.Items[i];
-        Resource list = originalList[i];
-
-
-
-                        if (list.DateChange != table.DateChange)
+                        MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+                        switch (result)
                         {
-                            MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
-                            switch (result)
-                            {
-                                case MessageBoxResult.Yes:
-                                    List<Resource> resourceList = AddToListForSave();
-        repository.SaveXmlFile(FileName, resourceList);
+                            case MessageBoxResult.Yes:
+                                List<Resource> resourceList = AddToListForSave();
+                                repository.SaveXmlFile(FileName, resourceList);
 
-                                    break;
-                                case MessageBoxResult.No:
-                                    e.Cancel = false;
-                                    break;
-                                case MessageBoxResult.Cancel:
-                                    e.Cancel = true;
-                                    break;
-                            }
-                            break;
+                                break;
+                            case MessageBoxResult.No:
+                                e.Cancel = false;
+                                break;
+                            case MessageBoxResult.Cancel:
+                                e.Cancel = true;
+                                break;
                         }
+                        break;
                     }
                 }
             }
+        }
 
-    
+
     }
 }

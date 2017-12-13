@@ -27,11 +27,12 @@ namespace XmlEditor
         {
             InitializeComponent();
         }
+      
 
         private void localFileButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFile = new OpenFileDialog();
-
+            openFile.Filter = "xml files(*.xml)|*.xml|All files (*.*)|*.*";
             bool? result = openFile.ShowDialog();
             if (result == true)
             {

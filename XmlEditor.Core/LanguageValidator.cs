@@ -30,10 +30,7 @@ namespace XmlEditor.Core
 
                         }
                     }
-                    //else
-                    //{
-                    //    IsValid.valid[i].ValidLanguage = false;
-                    //}
+
                 }
             }
         }

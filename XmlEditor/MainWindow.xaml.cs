@@ -62,20 +62,10 @@ namespace XmlEditor
             resourceList = new ResourceList(resources);
             xmlTableDataGrid.ItemsSource = resourceList;
 
+
+
         }
 
-        private void checkForChanges(int index)
-        {
-            Resource table = (Resource)xmlTableDataGrid.Items[index];
-            Resource list = (Resource)resourceList[index];
-
-            if (table != list)
-            {
-                string dateTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff");
-                table.DateChange = dateTime;
-                list.DateChange = dateTime;
-            }
-        }
 
         private List<Resource> AddToListForSave()
         {
@@ -100,8 +90,12 @@ namespace XmlEditor
 
             List<Resource> resourceList = AddToListForSave();
 
-            repository.SaveXmlFile(FileName, resourceList);
-            saveStatusBarMsg.Text = $"Last saved: {DateTime.UtcNow}";
+            bool isSaved = repository.SaveXmlFile(FileName, resourceList);
+            if (isSaved)
+            {
+                saveStatusBarMsg.Text = $"Last saved: {DateTime.Now}";
+
+            }
         }
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)

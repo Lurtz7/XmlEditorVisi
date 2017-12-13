@@ -122,7 +122,7 @@ namespace XmlEditor.Core
         {
             if (!inEdit) return;
             inEdit = false;
-         
+
             backupCopy = null;
         }
 
@@ -131,11 +131,14 @@ namespace XmlEditor.Core
         {
             if (PropertyChanged != null)
             {
-                //string dateTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff");
-                //DateChange = dateTime;
                 PropertyChanged(this,
                     new PropertyChangedEventArgs(propertyName));
-                
+                if (backupCopy != null)
+                {
+                    string dateTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff");
+                    DateChange = dateTime;
+                }
+
             }
         }
     }

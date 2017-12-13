@@ -5,16 +5,16 @@ using System.Text;
 
 namespace XmlEditor.Core
 {
-    public class DateValidator
+    public static class DateValidator
     {
-        public void ValidateDate(ObservableCollection<Resource> resourceList)
+        public static void ValidateDate(ObservableCollection<Resource> resourceList)
         {
             for (int i = 0; i < resourceList.Count; i++)
             {             
                 if (DateTime.TryParse(resourceList[i].DateChange,out DateTime dt))                
-                    IsValid.valid[i].ValidDate = true; 
+                    Validator.ValidatorList[i].ValidDate = true; 
                 else
-                    IsValid.valid[i].ValidDate = false;
+                    Validator.ValidatorList[i].ValidDate = false;
             }            
         }
     }

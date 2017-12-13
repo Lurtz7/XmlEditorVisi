@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -62,9 +63,10 @@ namespace XmlEditor
             resourceList = new ResourceList(resources);
             xmlTableDataGrid.ItemsSource = resourceList;
 
+
         }
 
-       
+
         private List<Resource> AddToListForSave()
         {
             List<Resource> resourceList = new List<Resource>();
@@ -88,8 +90,12 @@ namespace XmlEditor
 
             List<Resource> resourceList = AddToListForSave();
 
-            repository.SaveXmlFile(FileName, resourceList);
-            saveStatusBarMsg.Text = $"Last saved: {DateTime.Now}";
+            bool isSaved = repository.SaveXmlFile(FileName, resourceList);
+            if (isSaved)
+            {
+                saveStatusBarMsg.Text = $"Last saved: {DateTime.Now}";
+
+            }
         }
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)

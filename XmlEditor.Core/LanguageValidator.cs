@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace XmlEditor.Core
 {
-    public class LanguageValidator
+    public static class LanguageValidator
     {
-        public void ValidateLanguage(ObservableCollection<Resource> resourceList)
+        public static void ValidateLanguage(ObservableCollection<Resource> resourceList)
         {
             CultureInfo[] cultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
 
             for (int i = 0; i < resourceList.Count; i++)
             {
-                IsValid.valid[i].ValidLanguage = resourceList[i].Language == "1";
+                Validator.ValidatorList[i].ValidLanguage = resourceList[i].Language == "1";
 
                 foreach (CultureInfo culture in cultures)
                 {
@@ -25,7 +25,7 @@ namespace XmlEditor.Core
                     {
                         if (resourceList[i].Language.Equals(culture.Name, StringComparison.InvariantCulture))
                         {
-                            IsValid.valid[i].ValidLanguage = true;
+                            Validator.ValidatorList[i].ValidLanguage = true;
                             break;
 
                         }

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace XmlEditor.Core
 {
-    public class TenantValidator
+    public static class TenantValidator
     {
-        public void ValidateTenant(ObservableCollection<Resource> resourceList)
+        public static void ValidateTenant(ObservableCollection<Resource> resourceList)
         {
             int index = 0;
             foreach (Resource tenant in resourceList)
@@ -17,18 +17,18 @@ namespace XmlEditor.Core
                 if (tenant.Tenant.ToLower() == "root" || tenant.Tenant.ToLower() == "sop" || tenant.Tenant.ToLower() == "ptk" || tenant.Tenant.ToLower() == "folksam")
                 {
 
-                    IsValid.valid.Add(new IsValid
+                    Validator.ValidatorList.Add(new Validator
                     {
                         ValidTenant = true,
-                        Index = index
+                        
                     });
                 }
                 else
                 {
-                    IsValid.valid.Add(new IsValid
+                    Validator.ValidatorList.Add(new Validator
                     {
                         ValidTenant = false,
-                        Index = index
+                       
                     });
                 }
                 index++;

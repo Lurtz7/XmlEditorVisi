@@ -32,7 +32,7 @@
                     </StatusBarItem>
                 </StatusBar>
 
-                <DataGrid DockPanel.Dock="Right" x:Name="xmlTableDataGrid" Margin="0,0,0.4,0" VerticalAlignment="Stretch"  CanUserReorderColumns="False" HorizontalContentAlignment="Center"  RowEditEnding="xmlTableDataGrid_RowEditEnding" AutoGenerateColumns="False">
+                <DataGrid DockPanel.Dock="Right" x:Name="xmlTableDataGrid" Margin="0,0,0.4,0" VerticalAlignment="Stretch"  CanUserReorderColumns="False" HorizontalContentAlignment="Center" AutoGenerateColumns="False">
                     <!--AutoGeneratingColumn="xmlTableDataGrid_AutoGeneratingColumn"-->
                     <DataGrid.Resources>
                         <Style x:Key="errorStyle" TargetType="{x:Type TextBox}">

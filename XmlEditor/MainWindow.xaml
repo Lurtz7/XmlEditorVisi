@@ -59,7 +59,7 @@
                         <DataGridTextColumn Header="Language"      EditingElementStyle="{StaticResource errorStyle}" Binding="{Binding Language, ValidatesOnExceptions=True}" />
                         <DataGridTextColumn Header="GenericKey"    Binding="{Binding GenericKey, ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource errorStyle}"/>
                         <DataGridTextColumn Header="Tenant"        Binding="{Binding Tenant, ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource errorStyle}"/>
-                        <DataGridTextColumn Header="DateChange"    Binding="{Binding DateChange, ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource errorStyle}"/>
+                        <DataGridTextColumn Header="DateChange"    Binding="{Binding DateChange, ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource errorStyle}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="ResourceData"  Binding="{Binding ResourceData, ValidatesOnExceptions=True}" EditingElementStyle="{StaticResource errorStyle}"/>
                         
                     </DataGrid.Columns>

@@ -28,7 +28,7 @@ namespace XmlEditor.Core
             }
             if (!valid[0].ValidLanguage)
             {
-                return new ValidationResult(false, "Language is not in correct format.");
+                return new ValidationResult(false, "Language is not in correct format. Use language+region, French as used in Canada(fr-CA)");
             }
             if (!valid[0].ValidTenant)
             {

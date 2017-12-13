@@ -21,10 +21,14 @@ namespace XmlEditor.Core
 
                 foreach (CultureInfo culture in cultures)
                 {
-                    if (resourceList[i].Language.Equals(culture.Name, StringComparison.InvariantCulture))
+                    if (resourceList[i].Language.Length == 5)
                     {
-                        IsValid.valid[i].ValidLanguage = true;
-                        break;
+                        if (resourceList[i].Language.Equals(culture.Name, StringComparison.InvariantCulture))
+                        {
+                            IsValid.valid[i].ValidLanguage = true;
+                            break;
+
+                        }
                     }
                     //else
                     //{

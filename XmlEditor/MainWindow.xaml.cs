@@ -37,7 +37,7 @@ namespace XmlEditor
             InitializeComponent();
 
             FileName = fileName;
-            
+            this.Title = FileName;
 
             this.Loaded += MainWindow_Loaded;
             //resourceList.CollectionChanged += ResourceList_CollectionChanged;

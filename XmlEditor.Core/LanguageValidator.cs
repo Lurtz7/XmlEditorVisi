@@ -17,17 +17,19 @@ namespace XmlEditor.Core
 
             for (int i = 0; i < resourceList.Count; i++)
             {
+                IsValid.valid[i].ValidLanguage = resourceList[i].Language == "1";
+
                 foreach (CultureInfo culture in cultures)
                 {
-                    if (resourceList[i].Language == culture.Name)
+                    if (resourceList[i].Language.Equals(culture.Name, StringComparison.InvariantCulture))
                     {
                         IsValid.valid[i].ValidLanguage = true;
                         break;
                     }
-                    else
-                    {
-                        IsValid.valid[i].ValidLanguage = false;
-                    }
+                    //else
+                    //{
+                    //    IsValid.valid[i].ValidLanguage = false;
+                    //}
                 }
             }
         }

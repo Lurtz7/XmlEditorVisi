@@ -9,12 +9,90 @@ namespace XmlEditor.Core
 {
     public class Resource : IEditableObject, INotifyPropertyChanged
     {
-        public string Name { get; set; }
-        public string Language { get; set; }
-        public string Tenant { get; set; }
-        public string GenericKey { get; set; }
-        public string DateChange { get; set; }
-        public string ResourceData { get; set; }
+        private string _name;
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                if (_name == value) return;
+                _name = value;
+                OnPropertyChanged(nameof(Name));
+            }
+        }
+        private string _language;
+        public string Language
+        {
+            get
+            {
+                return _language;
+            }
+            set
+            {
+                if (_language == value) return;
+                _language = value;
+                OnPropertyChanged(nameof(Language));
+            }
+        }
+        private string _tenant;
+        public string Tenant
+        {
+            get
+            {
+                return _tenant;
+            }
+            set
+            {
+                if (_tenant == value) return;
+                _tenant = value;
+                OnPropertyChanged(nameof(Tenant));
+            }
+        }
+        private string _genericKey;
+        public string GenericKey
+        {
+            get
+            {
+                return _genericKey;
+            }
+            set
+            {
+                if (_genericKey == value) return;
+                _genericKey = value;
+                OnPropertyChanged(nameof(GenericKey));
+            }
+        }
+        private string _datechange;
+        public string DateChange
+        {
+            get
+            {
+                return _datechange;
+            }
+            set
+            {
+                if (_datechange == value) return;
+                _datechange = value;
+                OnPropertyChanged(nameof(DateChange));
+            }
+        }
+        private string _resourcedata;
+        public string ResourceData
+        {
+            get
+            {
+                return _resourcedata;
+            }
+            set
+            {
+                if (_resourcedata == value) return;
+                _resourcedata = value;
+                OnPropertyChanged(nameof(ResourceData));
+            }
+        }
 
 
         private Resource backupCopy;
@@ -44,6 +122,7 @@ namespace XmlEditor.Core
         {
             if (!inEdit) return;
             inEdit = false;
+         
             backupCopy = null;
         }
 
@@ -52,7 +131,8 @@ namespace XmlEditor.Core
         {
             if (PropertyChanged != null)
             {
-              
+                //string dateTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff");
+                //DateChange = dateTime;
                 PropertyChanged(this,
                     new PropertyChangedEventArgs(propertyName));
                 

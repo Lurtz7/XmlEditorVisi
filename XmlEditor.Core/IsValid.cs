@@ -25,7 +25,16 @@ namespace XmlEditor.Core
             Validator(resourceList);
             return valid.TrueForAll(v => v.Valid == true);
         }
+        public List<IsValid> ValidList(Resource resource)
+        {
+            ObservableCollection<Resource> isResourceValid = new ObservableCollection<Resource>
+            {
+                resource
+            };
 
+            Validator(isResourceValid);
+            return valid;
+        }
         public void Validator(ObservableCollection<Resource> resourceList)
         {
             tenant.ValidateTenant(resourceList);

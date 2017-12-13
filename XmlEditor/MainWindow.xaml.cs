@@ -88,7 +88,8 @@ namespace XmlEditor
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             var resources = LocalFileRepository.GetXmlFile(FileName);
-            xmlTableDataGrid.ItemsSource = new ResourceList(resources);
+            resourceList = new ResourceList(resources);
+            xmlTableDataGrid.ItemsSource = resourceList;
             //var resources = repository.GetXmlFile(FileName);
 
             //resourceList.Clear();

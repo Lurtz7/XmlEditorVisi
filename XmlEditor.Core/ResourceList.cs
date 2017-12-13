@@ -15,15 +15,15 @@ namespace XmlEditor.Core
 
         //public ResourceList()
         //{
-        //    this.Add(new Resource
-        //    {
-        //        Name = "aasdas",
-        //        Language = "aasdas",
-        //        DateChange = "aasdas",
-        //        GenericKey = "aasdas",
-        //        ResourceData = "aasdas",
-        //        Tenant = "aasdas"
-        //    });
+            //    this.Add(new Resource
+            //    {
+            //        Name = "aasdas",
+            //        Language = "aasdas",
+            //        DateChange = "aasdas",
+            //        GenericKey = "aasdas",
+            //        ResourceData = "aasdas",
+            //        Tenant = "aasdas"
+            //    });
         //}
 
 

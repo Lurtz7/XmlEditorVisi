@@ -43,27 +43,20 @@ namespace XmlEditor
         }
         public void SetMinWidths(object source, EventArgs e)
         {
-
             foreach (var column in xmlTableDataGrid.Columns)
             {
                 column.MinWidth = column.ActualWidth;
                 column.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
-
             }
         }
-
-
-
-
-
+        
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-
             var resources = LocalFileRepository.GetXmlFile(FileName);
             resourceList = new ResourceList(resources);
             xmlTableDataGrid.ItemsSource = resourceList;
-
-
+          
+            
         }
 
 
@@ -94,8 +87,11 @@ namespace XmlEditor
             if (isSaved)
             {
                 saveStatusBarMsg.Text = $"Last saved: {DateTime.Now}";
-
             }
+        }
+        private void SaveCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            saveButton_Click(sender, e);
         }
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)
@@ -129,8 +125,6 @@ namespace XmlEditor
                     Resource table = (Resource)xmlTableDataGrid.Items[i];
                     Resource list = originalList[i];
 
-
-
                     if (list.DateChange != table.DateChange)
                     {
                         MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
@@ -153,7 +147,5 @@ namespace XmlEditor
                 }
             }
         }
-
-
     }
 }

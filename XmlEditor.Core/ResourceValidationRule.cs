@@ -17,7 +17,17 @@ namespace XmlEditor.Core
         public override ValidationResult Validate(object value,
             System.Globalization.CultureInfo cultureInfo)
         {
-            Resource resource = (value as BindingGroup).Items[0] as Resource;
+            
+            Resource resource;
+            if (value is Resource)
+            {
+                resource = value as Resource;
+            }
+            else
+            {
+                resource = (value as BindingGroup).Items[0] as Resource;
+            }
+
 
             var validator = Validator.Validate(resource);
 

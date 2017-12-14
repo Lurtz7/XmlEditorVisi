@@ -8,7 +8,12 @@
         mc:Ignorable="d"
         SizeToContent="WidthAndHeight"
         Title="Resource Tool 1.0" Closing="Window_Closing">
-
+    <Window.CommandBindings>        
+        <CommandBinding Command="Save" Executed="SaveCommandBinding_Executed"></CommandBinding>
+    </Window.CommandBindings>
+    <Window.InputBindings>        
+        <KeyBinding Key="S" Modifiers="Control" Command="Save"></KeyBinding>
+    </Window.InputBindings>
     <DockPanel VerticalAlignment="Stretch" LastChildFill="False">
         <Menu DockPanel.Dock="Top">
             <Menu.ItemsPanel>
@@ -17,7 +22,7 @@
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
             <MenuItem Header="File">
-                <MenuItem Header="Save" Click="saveButton_Click" />
+                <MenuItem Name="menuSave" Header="Save" Click="saveButton_Click" Command="Save" InputGestureText="Ctrl+S" />
             </MenuItem>
         </Menu>
       
@@ -39,7 +44,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="Name"         Binding="{Binding Name, ValidatesOnExceptions=True}"         />
+                        <DataGridTextColumn Header="Name"         Binding="{Binding Name, ValidatesOnExceptions=True }"        />
                         <DataGridTextColumn Header="Language"     Binding="{Binding Language, ValidatesOnExceptions=True}"     />
                         <DataGridTextColumn Header="GenericKey"   Binding="{Binding GenericKey, ValidatesOnExceptions=True}"   />
                         <DataGridTextColumn Header="Tenant"       Binding="{Binding Tenant, ValidatesOnExceptions=True}"       />

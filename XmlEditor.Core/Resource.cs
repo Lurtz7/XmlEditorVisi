@@ -92,9 +92,8 @@ namespace XmlEditor.Core
                 _resourcedata = value;
                 OnPropertyChanged(nameof(ResourceData));
             }
-        }
-
-
+        }       
+        
         private Resource backupCopy;
         private bool inEdit;
 

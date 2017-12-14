@@ -92,16 +92,12 @@ namespace XmlEditor
             List<Resource> resourceList = AddToListForSave();
 
             bool isSaved = repository.SaveXmlFile(FileName, resourceList);
-            if (isSaved)
-            {
-                saveStatusBarMsg.Text = $"Last saved: {DateTime.Now}";
-            }
-            else
-            {
-                UnhandledErrorMsg();
-            }
+            if (isSaved)            
+                saveStatusBarMsg.Text = $"Last saved: {DateTime.Now}";            
+            else 
+                UnhandledErrorSaveMsg();
         }
-        private void UnhandledErrorMsg()
+        private void UnhandledErrorSaveMsg()
         {
             string messageBoxText = "The table has unhandled errors. Please correct the errors and then retry saving";
             string caption = "XmlEditor 1.0";
@@ -155,7 +151,7 @@ namespace XmlEditor
                                     List<Resource> resourceList = AddToListForSave();
                                     if (!repository.SaveXmlFile(FileName, resourceList))
                                     {
-                                        UnhandledErrorMsg();
+                                        UnhandledErrorSaveMsg();
                                         e.Cancel = true;
                                     }
                                         break;

@@ -58,10 +58,36 @@ namespace XmlEditor
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                var resources = LocalFileRepository.GetXmlFile(FileName);
+                resourceList = new ResourceList(resources);
+                xmlTableDataGrid.ItemsSource = resourceList;
+                //Validator.Validate(resourceList);
+                //bool isValid = Validator.ValidatorList.TrueForAll(o => o.IsValid);
 
-            var resources = LocalFileRepository.GetXmlFile(FileName);
-            resourceList = new ResourceList(resources);
-            xmlTableDataGrid.ItemsSource = resourceList;
+                //if (!isValid)
+                //{
+                //    string messageBoxText = "Wrong format in inputs";
+                //    string caption = "XmlEditor 1.0";
+                //    MessageBoxButton button = MessageBoxButton.OK;
+                //    MessageBoxImage icon = MessageBoxImage.Warning;
+                //    MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+                //}
+
+                
+
+            }
+            catch (Exception ex)
+            {
+                string messageBoxText = $"Could not open target file with errormessage : {ex.Message}";
+                string caption = "XmlEditor 1.0";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+
+
+            }
 
 
         }
@@ -117,43 +143,53 @@ namespace XmlEditor
             string caption = "XmlEditor 1.0";
             MessageBoxButton button = MessageBoxButton.YesNoCancel;
             MessageBoxImage icon = MessageBoxImage.Warning;
-            var originalList = LocalFileRepository.GetXmlFile(FileName);
-
-
-            for (int i = 0; i < xmlTableDataGrid.Items.Count; i++)
+            try
             {
-                var tableItems = xmlTableDataGrid.Items[i];
+                var originalList = LocalFileRepository.GetXmlFile(FileName);
 
-                if (tableItems.GetType() == originalList[0].GetType())
+                for (int i = 0; i < xmlTableDataGrid.Items.Count; i++)
                 {
-                    Resource table = (Resource)xmlTableDataGrid.Items[i];
-                    Resource list = originalList[i];
+                    var tableItems = xmlTableDataGrid.Items[i];
 
-
-
-                    if (list.DateChange != table.DateChange)
+                    if (tableItems.GetType() == originalList[0].GetType())
                     {
-                        MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
-                        switch (result)
-                        {
-                            case MessageBoxResult.Yes:
-                                List<Resource> resourceList = AddToListForSave();
-                                repository.SaveXmlFile(FileName, resourceList);
+                        Resource table = (Resource)xmlTableDataGrid.Items[i];
+                        Resource list = originalList[i];
 
-                                break;
-                            case MessageBoxResult.No:
-                                e.Cancel = false;
-                                break;
-                            case MessageBoxResult.Cancel:
-                                e.Cancel = true;
-                                break;
+
+
+                        if (list.DateChange != table.DateChange)
+                        {
+                            MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+                            switch (result)
+                            {
+                                case MessageBoxResult.Yes:
+                                    List<Resource> resourceList = AddToListForSave();
+                                    repository.SaveXmlFile(FileName, resourceList);
+
+                                    break;
+                                case MessageBoxResult.No:
+                                    e.Cancel = false;
+                                    break;
+                                case MessageBoxResult.Cancel:
+                                    e.Cancel = true;
+                                    break;
+                            }
+                            break;
                         }
-                        break;
                     }
+
                 }
             }
+            catch (Exception)
+            {
+
+
+            }
+
         }
-
-
     }
+
+
 }
+

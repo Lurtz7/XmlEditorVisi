@@ -30,11 +30,8 @@
                 </StatusBar>
 
                 <DataGrid DockPanel.Dock="Right" x:Name="xmlTableDataGrid" Margin="0,0,0.4,0" VerticalAlignment="Stretch"  CanUserReorderColumns="False" HorizontalContentAlignment="Center" AutoGenerateColumns="False">
-                   
-                  
                     
                     <DataGrid.Columns>
-                        
                         <DataGridTemplateColumn  Header=" " MaxWidth="70"  >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -42,17 +39,16 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="Name"          Binding="{Binding Name, ValidatesOnExceptions=True}"      />
-                        <DataGridTextColumn Header="Language"      Binding="{Binding Language, ValidatesOnExceptions=True}"     />
-                        <DataGridTextColumn Header="GenericKey"    Binding="{Binding GenericKey, ValidatesOnExceptions=True}"   />
-                        <DataGridTextColumn Header="Tenant"        Binding="{Binding Tenant, ValidatesOnExceptions=True}"       />
-                        <DataGridTextColumn Header="DateChange"    Binding="{Binding DateChange, ValidatesOnExceptions=True}"   />
-                        <DataGridTextColumn Header="ResourceData"  Binding="{Binding ResourceData, ValidatesOnExceptions=True}" />
-                        
+                        <DataGridTextColumn Header="Name"          Binding="{Binding Name, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"     />
+                        <DataGridTextColumn Header="Language"      Binding="{Binding Language, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"    />
+                        <DataGridTextColumn Header="GenericKey"    Binding="{Binding GenericKey, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"   />
+                        <DataGridTextColumn Header="Tenant"        Binding="{Binding Tenant, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"       />
+                        <DataGridTextColumn Header="DateChange"    Binding="{Binding DateChange, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"   />
+                        <DataGridTextColumn Header="ResourceData"  Binding="{Binding ResourceData, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
                     </DataGrid.Columns>
 
                     <DataGrid.RowValidationRules>
-                        <local:ResourceValidationRule ValidationStep="UpdatedValue"/>
+                        <local:ResourceValidationRule ValidationStep="ConvertedProposedValue"/>
                     </DataGrid.RowValidationRules>
 
                     <DataGrid.RowValidationErrorTemplate>
@@ -60,7 +56,6 @@
                             <Grid Margin="0,-2,0,-2" ToolTip="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}}, Path=(Validation.Errors)[0].ErrorContent}">
                                 <Ellipse StrokeThickness="0" Fill="Red" Width="{TemplateBinding FontSize}" Height="{TemplateBinding FontSize}" />
                                 <TextBlock Text="!" FontSize="{TemplateBinding FontSize}" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"  />
-                                
                             </Grid>
                         </ControlTemplate>
                     </DataGrid.RowValidationErrorTemplate>

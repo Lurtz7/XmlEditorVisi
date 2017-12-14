@@ -14,6 +14,7 @@
     <Window.InputBindings>        
         <KeyBinding Key="S" Modifiers="Control" Command="Save"></KeyBinding>
     </Window.InputBindings>
+    
     <DockPanel VerticalAlignment="Stretch" LastChildFill="False">
         <Menu DockPanel.Dock="Top">
             <Menu.ItemsPanel>
@@ -34,7 +35,7 @@
                     </StatusBarItem>
                 </StatusBar>
 
-                <DataGrid DockPanel.Dock="Right" x:Name="xmlTableDataGrid" Margin="0,0,0.4,0" VerticalAlignment="Stretch"  CanUserReorderColumns="False" HorizontalContentAlignment="Center" AutoGenerateColumns="False">
+                <DataGrid DockPanel.Dock="Right" x:Name="xmlTableDataGrid" Margin="0,0,0.4,0" VerticalAlignment="Stretch"  CanUserReorderColumns="False" HorizontalContentAlignment="Center" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True">
                     
                     <DataGrid.Columns>
                         <DataGridTemplateColumn  Header=" " MaxWidth="70"  >

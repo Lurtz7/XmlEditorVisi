@@ -49,28 +49,23 @@ namespace XmlEditor
                 column.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
             }
         }
-        
+
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
                 var resources = LocalFileRepository.GetXmlFile(FileName);
                 resourceList = new ResourceList(resources);
-                xmlTableDataGrid.ItemsSource = resourceList; 
-
+                xmlTableDataGrid.ItemsSource = resourceList;
             }
             catch (Exception ex)
             {
-                string messageBoxText = $"Could not open target file with errormessage : {ex.Message}";
+                string messageBoxText = $"Could not open target file, errormessage: {ex.Message}";
                 string caption = "XmlEditor 1.0";
                 MessageBoxButton button = MessageBoxButton.OK;
                 MessageBoxImage icon = MessageBoxImage.Warning;
                 MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
-
-
             }
-
-
         }
 
 
@@ -84,7 +79,6 @@ namespace XmlEditor
                     Resource savedItem = (Resource)item;
 
                     resourceList.Add(savedItem);
-
                 }
             }
             return resourceList;
@@ -102,7 +96,20 @@ namespace XmlEditor
             {
                 saveStatusBarMsg.Text = $"Last saved: {DateTime.Now}";
             }
+            else
+            {
+                UnhandledErrorMsg();
+            }
         }
+        private void UnhandledErrorMsg()
+        {
+            string messageBoxText = "The table has unhandled errors. Please correct the errors and then retry saving";
+            string caption = "XmlEditor 1.0";
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+        }
+
         private void SaveCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             saveButton_Click(sender, e);
@@ -117,7 +124,6 @@ namespace XmlEditor
                 resourceList.Remove(removedRow);
             }
         }
-
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
@@ -140,8 +146,6 @@ namespace XmlEditor
                         Resource table = (Resource)xmlTableDataGrid.Items[i];
                         Resource list = originalList[i];
 
-
-
                         if (list.DateChange != table.DateChange)
                         {
                             MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
@@ -149,9 +153,12 @@ namespace XmlEditor
                             {
                                 case MessageBoxResult.Yes:
                                     List<Resource> resourceList = AddToListForSave();
-                                    repository.SaveXmlFile(FileName, resourceList);
-
-                                    break;
+                                    if (!repository.SaveXmlFile(FileName, resourceList))
+                                    {
+                                        UnhandledErrorMsg();
+                                        e.Cancel = true;
+                                    }
+                                        break;
                                 case MessageBoxResult.No:
                                     e.Cancel = false;
                                     break;
@@ -170,10 +177,7 @@ namespace XmlEditor
 
 
             }
-
         }
     }
-
-
 }
 

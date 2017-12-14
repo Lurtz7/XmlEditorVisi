@@ -7,27 +7,18 @@ using System.Windows.Data;
 using System.Collections.Generic;
 using System.Text;
 
-
-
-
 namespace XmlEditor.Core
 {
     public class ResourceValidationRule : ValidationRule
     {
         public override ValidationResult Validate(object value,
             System.Globalization.CultureInfo cultureInfo)
-        {
-            
+        {            
             Resource resource;
             if (value is Resource)
-            {
-                resource = value as Resource;
-            }
+                resource = value as Resource; 
             else
-            {
-                resource = (value as BindingGroup).Items[0] as Resource;
-            }
-
+                resource = (value as BindingGroup).Items[0] as Resource;           
 
             var validator = Validator.Validate(resource);
 
@@ -35,7 +26,7 @@ namespace XmlEditor.Core
                 return new ValidationResult(false, "Date is not in correct format.");
 
             if (!validator.ValidLanguage)
-                return new ValidationResult(false, "Language is not in correct format. Use language+region, French as used in Canada(fr-CA)");
+                return new ValidationResult(false, "Language is not in correct format. Use format language+region, i.e. (fr-CA) French as used in Canada");
 
             if (!validator.ValidTenant)
                 return new ValidationResult(false, "Tenant is not recognized.");

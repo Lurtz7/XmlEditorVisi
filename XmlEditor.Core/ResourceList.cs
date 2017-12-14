@@ -9,7 +9,6 @@ namespace XmlEditor.Core
     {
         public string FileName { get; set; }
 
-
         public ResourceList(Resource[] resources)
         {
             foreach (var item in resources)
@@ -24,7 +23,6 @@ namespace XmlEditor.Core
                     Tenant = item.Tenant
                 });
             }
-
         }
     }
 }

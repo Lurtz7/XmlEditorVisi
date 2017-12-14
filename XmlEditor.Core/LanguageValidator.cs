@@ -17,20 +17,16 @@ namespace XmlEditor.Core
 
             for (int i = 0; i < resourceList.Count; i++)
             {
-                Validator.ValidatorList[i].ValidLanguage = resourceList[i].Language == "1";
-
-                foreach (CultureInfo culture in cultures)
-                {
-                    if (resourceList[i].Language.Length == 5)
+                if (resourceList[i].Language.Length == 5)
+                {                   
+                    foreach (CultureInfo culture in cultures)
                     {
                         if (resourceList[i].Language.Equals(culture.Name, StringComparison.InvariantCulture))
                         {
                             Validator.ValidatorList[i].ValidLanguage = true;
                             break;
-
                         }
                     }
-
                 }
             }
         }

@@ -10,11 +10,9 @@ namespace XmlEditor.Core
 {
     public class LocalFileRepository
     {
-        Validator isItValid = new Validator();
         static public Resource[] GetXmlFile(string path)
         {
             XDocument document = XDocument.Load(path);
-
 
             var resourceElements = document
                 .Element("Resources")
@@ -27,20 +25,15 @@ namespace XmlEditor.Core
                     Language = e.Element("Language").Value,
                     GenericKey = e.Element("GenericKey").Value,
                     Tenant = e.Element("Tenant").Value,
-
-
-
                 })
                 .ToArray();
 
             return resourceElements;
         }
 
-
         public bool SaveXmlFile(string fileName, List<Resource> resourceList)
         {
             bool save = Validator.ValidatorList.TrueForAll(o => o.IsValid);
-         
 
             if (save)
             {
@@ -57,22 +50,8 @@ namespace XmlEditor.Core
                 document.Save(fileName);
                 return true;
             }
-
             else
-            {
-                string messageBoxText = "Cant save,wrong input in table. Try correct it!";
-                string caption = "XmlEditor 1.0";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
                 return false;
-                
-            }
-
         }
-
-
-
-
     }
 }

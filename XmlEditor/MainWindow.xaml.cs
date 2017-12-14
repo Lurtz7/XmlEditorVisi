@@ -62,20 +62,7 @@ namespace XmlEditor
             {
                 var resources = LocalFileRepository.GetXmlFile(FileName);
                 resourceList = new ResourceList(resources);
-                xmlTableDataGrid.ItemsSource = resourceList;
-                //Validator.Validate(resourceList);
-                //bool isValid = Validator.ValidatorList.TrueForAll(o => o.IsValid);
-
-                //if (!isValid)
-                //{
-                //    string messageBoxText = "Wrong format in inputs";
-                //    string caption = "XmlEditor 1.0";
-                //    MessageBoxButton button = MessageBoxButton.OK;
-                //    MessageBoxImage icon = MessageBoxImage.Warning;
-                //    MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
-                //}
-
-                
+                xmlTableDataGrid.ItemsSource = resourceList; 
 
             }
             catch (Exception ex)

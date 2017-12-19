@@ -49,15 +49,14 @@ namespace XmlEditor
                 column.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
             }
         }
-        
+
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
                 var resources = LocalFileRepository.GetXmlFile(FileName);
                 resourceList = new ResourceList(resources);
-                xmlTableDataGrid.ItemsSource = resourceList; 
-
+                xmlTableDataGrid.ItemsSource = resourceList;
             }
             catch (Exception ex)
             {
@@ -101,6 +100,16 @@ namespace XmlEditor
             if (isSaved)
             {
                 saveStatusBarMsg.Text = $"Last saved: {DateTime.Now}";
+            }
+            else
+            {
+
+                string messageBoxText = "Cant save,wrong input in table. Try correct it!";
+                string caption = "XmlEditor 1.0";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+
             }
         }
         private void SaveCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -149,8 +158,16 @@ namespace XmlEditor
                             {
                                 case MessageBoxResult.Yes:
                                     List<Resource> resourceList = AddToListForSave();
-                                    repository.SaveXmlFile(FileName, resourceList);
-
+                                    var isSaved = repository.SaveXmlFile(FileName, resourceList);
+                                    if (!isSaved)
+                                    {
+                                        string messageBoxTextWrong = "Cant save,wrong input in table. Try correct it!";
+                                        string captionWrong = "XmlEditor 1.0";
+                                        MessageBoxButton buttonWrong = MessageBoxButton.OK;
+                                        MessageBoxImage iconWrong = MessageBoxImage.Warning;
+                                        MessageBoxResult resultWrong = MessageBox.Show(messageBoxTextWrong, captionWrong, buttonWrong, iconWrong);
+                                        e.Cancel = true;
+                                    }
                                     break;
                                 case MessageBoxResult.No:
                                     e.Cancel = false;

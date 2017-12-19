@@ -12,20 +12,25 @@ namespace XmlEditor.Core
         public bool ValidLanguage { get; set; }
         public bool ValidDate { get; set; }
         public bool IsValid { get; set; }
-        
+
 
         public static List<Validator> ValidatorList { get; } = new List<Validator>();
-        
+
 
         public static Validator Validate(Resource resource)
         {
-            ObservableCollection<Resource> resourceList = new ObservableCollection<Resource>
+            if (resource.Language != null)
+            {
+
+                ObservableCollection<Resource> resourceList = new ObservableCollection<Resource>
             {
                 resource
             };
 
-            Validate(resourceList);
-            return ValidatorList.First();
+                Validate(resourceList);
+                return ValidatorList.First();
+            }
+            return null;
         }
 
         public static void Validate(ObservableCollection<Resource> resourceList)
@@ -36,7 +41,7 @@ namespace XmlEditor.Core
             DateValidator.ValidateDate(resourceList);
 
             foreach (var item in ValidatorList)
-            {                
+            {
                 if (item.ValidTenant && item.ValidDate && item.ValidLanguage)
                 {
                     item.IsValid = true;

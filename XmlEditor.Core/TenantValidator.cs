@@ -14,22 +14,26 @@ namespace XmlEditor.Core
             int index = 0;
             foreach (Resource tenant in resourceList)
             {
-                if (tenant.Tenant.ToLower() == "root" || tenant.Tenant.ToLower() == "sop" || tenant.Tenant.ToLower() == "ptk" || tenant.Tenant.ToLower() == "folksam")
+                if (tenant.Tenant != null)
                 {
 
-                    Validator.ValidatorList.Add(new Validator
+                    if (tenant.Tenant.ToLower() == "root" || tenant.Tenant.ToLower() == "sop" || tenant.Tenant.ToLower() == "ptk" || tenant.Tenant.ToLower() == "folksam")
                     {
-                        ValidTenant = true,
-                        
-                    });
-                }
-                else
-                {
-                    Validator.ValidatorList.Add(new Validator
+
+                        Validator.ValidatorList.Add(new Validator
+                        {
+                            ValidTenant = true,
+
+                        });
+                    }
+                    else
                     {
-                        ValidTenant = false,
-                       
-                    });
+                        Validator.ValidatorList.Add(new Validator
+                        {
+                            ValidTenant = false,
+
+                        });
+                    }
                 }
                 index++;
             }

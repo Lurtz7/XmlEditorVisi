@@ -41,7 +41,6 @@ namespace XmlEditor
                 var mainWindow = new MainWindow(filename);
                 mainWindow.FileName = filename;
                 
-
                 mainWindow.Show();
             }
 

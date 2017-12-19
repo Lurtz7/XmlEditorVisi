@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
@@ -60,11 +61,7 @@ namespace XmlEditor.Core
 
             else
             {
-                string messageBoxText = "Cant save,wrong input in table. Try correct it!";
-                string caption = "XmlEditor 1.0";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+               
                 return false;
                 
             }
